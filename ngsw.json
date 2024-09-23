@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1727055443932,
+  "timestamp": 1727056023313,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -13,7 +13,7 @@
       "urls": [
         "/favicon.ico",
         "/index.html",
-        "/main-QHJM55FL.js",
+        "/main-7QIBYR5G.js",
         "/manifest.webmanifest",
         "/polyfills-SCHOHYNV.js",
         "/styles-V5QHCHTK.css"
@@ -84,8 +84,8 @@
     "/assets/sounds/rotating.wav": "bdcaa14c23d02245cfda2ba5cbf182a0e6fe9446",
     "/assets/svg/cart-shopping-solid.svg": "f6adcb1d10fbec2fdc2f2423c73bd9f89b68cb95",
     "/favicon.ico": "9c39f434fe1261f68c5e3eefdf734630d99c5670",
-    "/index.html": "ea1691cb931f572fd14af5a4287b49defdbd3944",
-    "/main-QHJM55FL.js": "f6ec4fa0d2ef65d2a834c484246eef466a51bef3",
+    "/index.html": "54b845ab9ac9438f96326b75ff3160601502a60a",
+    "/main-7QIBYR5G.js": "e3edd303bf83cb3de8323fa3c5db8955166b1fdc",
     "/manifest.webmanifest": "f4a3f079c560c4db1fdfda74892afca9812064c2",
     "/media/KCDJHi-Jacker-GZL3BGVO.otf": "9b8ce025eb7f5f69ee0e82a2c1fcb92a9956855c",
     "/media/default-T3FIH3AR.svg": "dd82f2eec2d711ca08f2567af831eda1a95e4785",
