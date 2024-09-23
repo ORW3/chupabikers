@@ -1,0 +1,90 @@
+<div class="nav">
+  <div id="top-nav">
+    <div class="scroll" style="--time: 40s">
+      <div>
+        <span (click)="this.rutas.irInicio()">Inicio</span>
+        <img src="assets/img/wheel.png" class="rueda">
+        <span *ngIf="!isLoggedIn" (click)="this.rutas.irRegistro()">Registro</span><span *ngIf="isLoggedIn"
+          (click)="logout()">Cerrar sesión</span>
+        <img src="assets/img/wheel.png" class="rueda">
+        <span (click)="this.rutas.irInfo()">Información</span>
+        <img *ngIf="mostrar" src="assets/img/wheel.png" class="rueda">
+        <span *ngIf="mostrar" (click)="this.rutas.irInicio()">Inicio</span>
+        <img *ngIf="mostrar" src="assets/img/wheel.png" class="rueda">
+        <span *ngIf="!isLoggedIn && mostrar" (click)="this.rutas.irRegistro()">Registro</span><span
+          *ngIf="isLoggedIn && mostrar" (click)="logout()">Cerrar sesión</span>
+        <img *ngIf="mostrar" src="assets/img/wheel.png" class="rueda">
+        <span *ngIf="mostrar" (click)="this.rutas.irInfo()">Información</span>
+        <img *ngIf="mostrar" src="assets/img/wheel.png" class="rueda">
+      </div>
+      <div *ngIf="mostrar">
+        <span (click)="this.rutas.irInicio()">Inicio</span>
+        <img src="assets/img/wheel.png" class="rueda">
+        <span *ngIf="!isLoggedIn" (click)="this.rutas.irRegistro()">Registro</span><span *ngIf="isLoggedIn"
+          (click)="logout()">Cerrar sesión</span>
+        <img src="assets/img/wheel.png" class="rueda">
+        <span (click)="this.rutas.irInfo()">Información</span>
+        <img src="assets/img/wheel.png" class="rueda">
+        <span (click)="this.rutas.irInicio()">Inicio</span>
+        <img src="assets/img/wheel.png" class="rueda">
+        <span *ngIf="!isLoggedIn" (click)="this.rutas.irRegistro()">Registro</span><span *ngIf="isLoggedIn"
+          (click)="logout()">Cerrar sesión</span>
+        <img src="assets/img/wheel.png" class="rueda">
+        <span (click)="this.rutas.irInfo()">Información</span>
+        <img src="assets/img/wheel.png" class="rueda">
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!mostrar" class="navmark">
+    <img src="assets/img/logo.png">
+  </div>
+</div>
+
+
+<div class="ordenes-carro" id="ordenes-carro">
+  <p *ngIf="ordenes.length <= 0" class="ordenes">
+    No hay ordenes registradas
+  </p>
+  <div *ngIf="ordenes.length > 0" class="ordenes">
+    <div *ngFor="let orden of ordenes; let i = index">
+      <qrcode *ngIf="orden.estaPagado" [qrdata]="orden._id" [width]="100" [errorCorrectionLevel]="'M'"></qrcode>
+      <span *ngIf="!orden.estaPagado">
+        <button #pagarButton (click)="pagar(orden.precio, orden._id, getNombreDesafio(orden.desafio))"
+          type="button">Pagar</button>
+      </span>
+      <p>{{ getNombreDesafio(orden.desafio) }} + {{ orden.kit }} <br><br><b>${{ orden.precio }}</b></p>
+    </div>
+  </div>
+  <!--<table >
+    <thead>
+            <tr>
+                <th>Desafio</th>
+                <th>Kit</th>
+                <th>Precio</th>
+                <th>Código de acceso</th>
+            </tr>
+        </thead>
+    <tbody>
+      <tr *ngFor="let orden of ordenes; let i = index">
+        <td>
+          <qrcode *ngIf="orden.estaPagado" [qrdata]="orden._id" [width]="100" [errorCorrectionLevel]="'M'"></qrcode>
+          <span *ngIf="!orden.estaPagado">
+            <button #pagarButton (click)="pagar(orden.precio, orden._id, getNombreDesafio(orden.desafio))"
+              type="button">Pagar</button>
+          </span>
+        </td>
+        <td>{{ getNombreDesafio(orden.desafio) }} {{ orden.kit }} <br> ${{ orden.precio }}</td>
+      </tr>
+    </tbody>
+  </table>-->
+
+  <canvas id="canvas">
+  </canvas>
+  <div #pagarDiv id="pagarDiv">
+    <h1>Resumen de Pago</h1>
+    <p>Orden: {{ ordenS }}</p>
+    <p>Total: ${{ total }}</p>
+    <div #paypal class="paypal"><ngx-paypal [config]="payPalConfig"></ngx-paypal></div>
+
+  </div>
+</div>

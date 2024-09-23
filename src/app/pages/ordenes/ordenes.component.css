@@ -1,0 +1,446 @@
+body {
+  letter-spacing: 0.5px;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+qrcode{
+  filter: invert(1);
+}
+
+@media (min-width: 768px) {
+  qrcode{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100px;
+  }
+
+
+  /* NAV */
+
+  .nav {
+    width: 100%;
+    height: 4rem;
+    background-color: none;
+    z-index: 100;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    visibility: hidden;
+  }
+
+  #top-nav {
+    height: 4rem;
+    width: 100%;
+    background-color: #0e1012;
+    border-bottom: 0.1rem solid white;
+    align-items: center;
+    overflow: hidden;
+    visibility: visible;
+  }
+
+  /* Animación */
+
+  .scroll {
+    position: relative;
+    width: 200%;
+    display: flex;
+    align-items: center;
+    height: 100%;
+
+    font-family: "Lato", sans-serif;
+    /*text-transform: uppercase;*/
+    font-size: 20px;
+  }
+
+  .scroll div {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    animation: scroll var(--time) linear infinite;
+    animation-delay: calc(var(--time) * -1);
+    align-items: center;
+  }
+
+  .scroll div:nth-child(2) {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    animation: scroll2 var(--time) linear infinite;
+    animation-delay: calc(var(--time) / -2);
+    align-items: center;
+  }
+
+  .scroll:hover div {
+    animation-play-state: paused;
+  }
+
+  .scroll:hover div .rueda {
+    animation-play-state: paused;
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(100%);
+    }
+
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  @keyframes scroll2 {
+    0% {
+      transform: translateX(0);
+    }
+
+    100% {
+      transform: translateX(-200%);
+    }
+  }
+
+  .scroll div span {
+    color: #fff;
+  }
+
+  .scroll div span:hover {
+    text-decoration: underline;
+    cursor: var(--cursor-pointer);
+  }
+
+  .rueda {
+    filter: brightness(0) invert(1);
+    height: 20px;
+    width: 20px;
+    animation: spin 1s linear infinite;
+  }
+
+  /**/
+
+  #ordenes-carro {
+    margin-top: 4rem;
+    width: 100%;
+    height: calc(100vh - 4rem);
+    display: flex;
+    flex-direction: row;
+  }
+
+  #canvas {
+    height: 100%;
+    width: 400px;
+    border-left: 0.1rem solid white;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #pagarDiv {
+    overflow-y: scroll;
+    scrollbar-color: orangered transparent;
+    scrollbar-gutter: stable;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    border-radius: 20px;
+    position: fixed;
+    right: 50px;
+    transform: translate(0, 11.5%);
+    height: 70%;
+    width: 300px;
+    background-color: #0e1012;
+    z-index: 1;
+    border: 0.1rem solid white;
+  }
+
+  #pagarDiv h1 {
+    color: white;
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-bottom: 20px;
+    margin-top: 30px;
+  }
+
+  #pagarDiv p {
+    color: white;
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+
+  .paypal {
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+
+  .ordenes {
+    width: calc(100% - 400px);
+    display: block;
+    color: white;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .ordenes div{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .ordenes div p{
+    margin-left: 20px;
+  }
+
+  button {
+    margin-top: 32.5px;
+    margin-bottom: 32.5px;
+    outline: none;
+    border: none;
+    cursor: var(--cursor-pointer);
+    width: 100px;
+    height: 35px;
+    border-radius: 30px;
+    font-size: 15px;
+    color: #ffffff;
+    text-align: center;
+    background: linear-gradient(
+      135deg,
+      #000000 0%,
+      #000000 25%,
+      #aa4400 50%,
+      orangered 75%,
+      #a10101 100%
+    );
+    background-size: 400% 400%;
+    background-repeat: no-repeat;
+    border: 0.1rem solid white;
+    transition: 0.5s all;
+  }
+
+  button:hover {
+    background-position: 100% 100%;
+  }
+}
+
+
+@media(max-width:767px){
+  * {
+    overflow: hidden;
+  }
+
+  body {
+    max-height: 100vh;
+    letter-spacing: 0.5px;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+  }
+
+  /* NAV */
+
+  .nav {
+    width: 100%;
+    height: 50px;
+    background-color: none;
+    z-index: 100;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 0.1rem solid white;
+    overflow: hidden;
+  }
+
+  #top-nav {
+    height: 100%;
+    width: calc(100% - 70px);
+    background-color: #0e1012;
+    align-items: center;
+    overflow-x: scroll;
+    scrollbar-width: none;
+  }
+
+  .navmark {
+    z-index: 1;
+    width: 70px;
+    height: 50px;
+    background-color: #0e1012;
+    visibility: visible;
+    display: flex;
+    justify-content: center;
+    cursor: var(--cursor-pointer);
+    box-shadow: 0px 0px 0px #0e1012, -10px 0px 10px #0e1012;
+  }
+
+  .navmark img {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  /* Animación */
+
+  .scroll {
+    position: relative;
+    width: 150%;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin: 0 0;
+    font-family: "Lato", sans-serif;
+    /*text-transform: uppercase;*/
+    font-size: 16px;
+  }
+
+  .scroll div {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .scroll div span {
+    color: #fff;
+  }
+
+  .scroll div span:hover {
+    text-decoration: underline;
+    cursor: var(--cursor-pointer);
+  }
+
+  .rueda {
+    filter: brightness(0) invert(1);
+    height: 15px;
+    width: 15px;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /**/
+
+  .ordenes-carro {
+    margin-top: 50px;
+    width: 100%;
+    height: calc(100vh - 50px);
+    color: white;
+  }
+
+  .ordenes {
+    width: 100%;
+    height: 60%;
+    font-size: 15px;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+  }
+
+  .ordenes div{
+    width: 100%;
+    height: max-content;
+  }
+
+  qrcode{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+
+  #pagarDiv {
+    overflow-y: scroll;
+    scrollbar-color: orangered transparent;
+    scrollbar-gutter: stable; 
+    scrollbar-width: thin;
+    height: 40%;
+    width: 100%;
+    border-top: 0.1rem solid white;
+    z-index: 1;
+  }
+
+  thead, tbody{
+    width: 100%;
+  }
+
+  #pagarDiv h1 {
+    color: white;
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-bottom: 20px;
+    margin-top: 30px;
+  }
+
+  #pagarDiv p {
+    color: white;
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+
+  .paypal {
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+
+  button {
+    margin-top: 32.5px;
+    margin-bottom: 32.5px;
+    outline: none;
+    border: none;
+    cursor: var(--cursor-pointer);
+    width: 100px;
+    height: 35px;
+    border-radius: 30px;
+    font-size: 15px;
+    color: #ffffff;
+    text-align: center;
+    background: linear-gradient(
+      135deg,
+      #000000 0%,
+      #000000 25%,
+      #aa4400 50%,
+      orangered 75%,
+      #a10101 100%
+    );
+    background-size: 400% 400%;
+    background-repeat: no-repeat;
+    border: 0.1rem solid white;
+    transition: 0.5s all;
+  }
+
+  button:hover {
+    background-position: 100% 100%;
+  }
+
+  #canvas {
+    visibility: hidden;
+    height: calc(40% - 70px);
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-top: 0.1rem solid white;
+  }
+
+
+}

@@ -1,0 +1,578 @@
+* {
+  margin: 0;
+  padding: 0;
+  background: var(--shadow);
+}
+
+
+@media (min-width: 768px) {
+  .fondo {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    font-family: "Lato", sans-serif;
+    color: #ffffff;
+  }
+
+  #canvas {
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+  }
+
+  .container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #forme {
+    overflow-y: scroll;
+    scrollbar-color: orangered transparent;
+    scrollbar-gutter: stable;
+    scrollbar-width: none;
+    z-index: 1;
+    width: 290px;
+    height: 450px;
+    padding: 50px 35px 35px 35px;
+    border-radius: 40px;
+    background: var(--shadow);
+    border: 0.1rem solid white;
+  }
+
+  .bar {
+    position: absolute;
+    display: flex;
+    height: 15px;
+    width: 100px;
+    flex-direction: row;
+    justify-content: right;
+    margin-top: -30px;
+    margin-left: 15%;
+    background-color: unset;
+  }
+
+  #regresar {
+    height: 15px;
+    width: 15px;
+    background-color: rgba(255, 127, 42, 0.237);
+    border: none;
+    outline: none;
+    border-radius: 100%;
+    margin-left: 3px;
+    cursor: var(--cursor-pointer);
+  }
+
+  #cerrar {
+    height: 15px;
+    width: 15px;
+    background-color: orangered; /* #a10101, #a1010148 */
+    border: none;
+    outline: none;
+    border-radius: 100%;
+    margin-left: 3px;
+    cursor: var(--cursor-pointer);
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    margin: 0 auto;
+  }
+
+  .logo img {
+    width: 100%;
+    width: 100%;
+    background: none;
+  }
+
+  .registro {
+    padding-top: 24px;
+    text-align: center;
+    background: none;
+    letter-spacing: 0.5px;
+    font-size: 25px;
+    font-family: jacker;
+  }
+
+  /*#A02C2C  rgb(160, 44, 44)*/
+  /*#0D0D0D*/
+  /*#FF7F2A*/
+
+  .rellenar {
+    width: 100%;
+    padding: 50px 5px 5px 0px;
+    background: none;
+  }
+
+  .rellenar input {
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 15px;
+    color: #ffffff;
+    padding: 20px 10px 20px 20px;
+    letter-spacing: 0.5px;
+    cursor: var(--cursor-text);
+  }
+
+  .rellenar input::placeholder {
+    color: #b8b8b8bf;
+  }
+
+  .rellenar i {
+    height: 20px;
+    margin: 0 10px -3px 25px;
+    color: #b8b8b8;
+  }
+  
+  .contenedor-select{
+    font-size: 15px;
+    color: #ffffff;
+    padding: 20px 10px 20px 20px;
+    letter-spacing: 0.5px;
+  }
+
+  .contenedor-select label{
+    margin-right: 20px;
+  }
+
+  .contenedor-select select{
+    font-size: 15px;
+    color: #ffffff;
+  }
+  
+
+  .contenedor-button{
+    font-size: 15px;
+    color: #ffffff;
+    padding: 20px 10px 20px 20px;
+    letter-spacing: 0.5px;
+  }
+
+  .contenedor-button button{
+    margin-top: 10px;
+    outline: none;
+    border: none;
+    cursor: var(--cursor-pointer);
+    font-size: 15px;
+    width: 100px;
+    color: #ffffff;
+    text-align: center;
+    background: linear-gradient(
+      135deg,
+      #000000 0%,
+      #000000 25%,
+      #aa4400 50%,
+      orangered 75%,
+      #a10101 100%
+    );
+    background-size: 400% 400%;
+    background-repeat: no-repeat;
+    border: 0.1rem solid white;
+    transition: 0.5s all;
+  }
+
+  .contenedor-button button:hover {
+    background-position: 100% 100%;
+  }
+
+  .contenedor-button2{
+    font-size: 15px;
+    color: #ffffff;
+    padding: 20px 10px 20px 20px;
+    letter-spacing: 0.5px;
+  }
+
+  .contenedor-button2 button{
+    margin-top: 10px;
+    outline: none;
+    border: none;
+    cursor: var(--cursor-pointer);
+    font-size: 15px;
+    width: 100px;
+    color: #ffffff;
+    text-align: center;
+    background: linear-gradient(
+      135deg,
+      #000000 0%,
+      #000000 25%,
+      #aa4400 50%,
+      orangered 75%,
+      #a10101 100%
+    );
+    background-size: 400% 400%;
+    background-repeat: no-repeat;
+    border: 0.1rem solid white;
+    transition: 0.5s all;
+  }
+
+  .contenedor-button2 button:hover {
+    background-position: 100% 100%;
+  }
+
+  .fotoBici, .logoF, .nom, .pass, .mtb, .correo, .telefono, .contacto, .edad, .sangre, .sexo, .estado {
+    background-color: var(--shadow);
+    border-top: 0.1rem solid white;
+  }
+
+  .boton-registro {
+    margin-top: 25px;
+    font-family: "Lato", sans-serif;
+    outline: none;
+    border: none;
+    cursor: var(--cursor-pointer);
+    width: 100%;
+    height: 50px;
+    border-radius: 30px;
+    font-size: 15px;
+    color: #ffffff;
+    text-align: center;
+    background: linear-gradient(
+      135deg,
+      #000000 0%,
+      #000000 25%,
+      #aa4400 50%,
+      orangered 75%,
+      #a10101 100%
+    );
+    background-size: 400% 400%;
+    background-repeat: no-repeat;
+    border: 0.1rem solid white;
+    transition: 0.5s all;
+  }
+
+  .boton-registro:hover {
+    background-position: 100% 100%;
+  }
+
+  .boton-registro:active {
+    background-color: #aa4400;
+  }
+
+  .inicio {
+    color: #ffffff;
+    padding-top: 20px;
+    text-align: center;
+  }
+
+  .inicio a {
+    text-decoration: none;
+    color: orangered;
+    cursor: var(--cursor-pointer);
+  }
+
+  .warnings {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 10px;
+    background: none;
+    height: 20px;
+    width: 100%;
+  }
+
+  .linea {
+    border-top: 0.1rem solid white;
+  }
+}
+
+@media (max-width: 767px) {
+  .fondo {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    font-family: "Lato", sans-serif;
+    color: #ffffff;
+  }
+
+  #canvas {
+    visibility: hidden;
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+  }
+
+  .container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #forme {
+    overflow-y: scroll;
+    scrollbar-color: orangered transparent;
+    scrollbar-gutter: stable;
+    scrollbar-width: none;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    padding: 50px 35px 35px 35px;
+    border-radius: 40px;
+    background: var(--shadow);
+  }
+
+  .bar {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    display: flex;
+    height: 25px;
+    width: 100px;
+    flex-direction: row;
+    justify-content: right;
+    background-color: unset;
+  }
+
+  #regresar {
+    height: 25px;
+    width: 25px;
+    background-color: rgba(255, 127, 42, 0.237);
+    border: none;
+    outline: none;
+    border-radius: 100%;
+    margin-left: 3px;
+    cursor: var(--cursor-pointer);
+  }
+
+  #cerrar {
+    height: 25px;
+    width: 25px;
+    background-color: orangered; /* #a10101, #a1010148 */
+    border: none;
+    outline: none;
+    border-radius: 100%;
+    margin-left: 5px;
+    cursor: var(--cursor-pointer);
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    margin: 0 auto;
+  }
+
+  .logo img {
+    width: 100%;
+    width: 100%;
+    background: none;
+  }
+
+  .registro {
+    padding-top: 24px;
+    text-align: center;
+    background: none;
+    letter-spacing: 0.5px;
+    font-size: 25px;
+    font-family: jacker;
+  }
+
+  /*#A02C2C  rgb(160, 44, 44)*/
+  /*#0D0D0D*/
+  /*#FF7F2A*/
+
+  .rellenar {
+    width: 100%;
+    padding: 50px 5px 5px 0px;
+    background: none;
+  }
+
+  .rellenar input {
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 15px;
+    color: #ffffff;
+    padding: 20px 10px 20px 20px;
+    letter-spacing: 0.5px;
+    cursor: var(--cursor-text);
+  }
+
+  .rellenar input::placeholder {
+    color: #b8b8b8bf;
+  }
+
+  .rellenar i {
+    height: 20px;
+    margin: 0 10px -3px 25px;
+    color: #b8b8b8;
+  }
+  
+  .contenedor-select{
+    font-size: 15px;
+    color: #ffffff;
+    padding: 20px 10px 20px 20px;
+    letter-spacing: 0.5px;
+  }
+
+  .contenedor-select label{
+    margin-right: 20px;
+  }
+
+  .contenedor-select select{
+    font-size: 15px;
+    color: #ffffff;
+  }
+
+  .contenedor-button{
+    font-size: 15px;
+    color: #ffffff;
+    padding: 20px 10px 20px 20px;
+    letter-spacing: 0.5px;
+  }
+
+  .contenedor-button button{
+    margin-top: 10px;
+    outline: none;
+    border: none;
+    cursor: var(--cursor-pointer);
+    font-size: 15px;
+    width: 100px;
+    color: #ffffff;
+    text-align: center;
+    background: linear-gradient(
+      135deg,
+      #000000 0%,
+      #000000 25%,
+      #aa4400 50%,
+      orangered 75%,
+      #a10101 100%
+    );
+    background-size: 400% 400%;
+    background-repeat: no-repeat;
+    border: 0.1rem solid white;
+    transition: 0.5s all;
+  }
+
+  .contenedor-button button:hover {
+    background-position: 100% 100%;
+  }
+
+  .contenedor-button2{
+    font-size: 15px;
+    color: #ffffff;
+    padding: 20px 10px 20px 20px;
+    letter-spacing: 0.5px;
+  }
+
+  .contenedor-button2 button{
+    margin-top: 10px;
+    outline: none;
+    border: none;
+    cursor: var(--cursor-pointer);
+    font-size: 15px;
+    width: 100px;
+    color: #ffffff;
+    text-align: center;
+    background: linear-gradient(
+      135deg,
+      #000000 0%,
+      #000000 25%,
+      #aa4400 50%,
+      orangered 75%,
+      #a10101 100%
+    );
+    background-size: 400% 400%;
+    background-repeat: no-repeat;
+    border: 0.1rem solid white;
+    transition: 0.5s all;
+  }
+
+  .contenedor-button2 button:hover {
+    background-position: 100% 100%;
+  }
+
+  .fotoBici, .logoF, .nom, .pass, .mtb, .correo, .telefono, .contacto, .edad, .sangre, .sexo, .estado {
+    background-color: var(--shadow);
+    border-top: 0.1rem solid white;
+  }
+
+  .boton-registro {
+    margin-bottom: 25px;
+    margin-top: 25px;
+    font-family: "Lato", sans-serif;
+    outline: none;
+    border: none;
+    cursor: var(--cursor-pointer);
+    width: 100%;
+    height: 50px;
+    border-radius: 30px;
+    font-size: 15px;
+    color: #ffffff;
+    text-align: center;
+    background: linear-gradient(
+      135deg,
+      #000000 0%,
+      #000000 25%,
+      #aa4400 50%,
+      orangered 75%,
+      #a10101 100%
+    );
+    background-size: 400% 400%;
+    background-repeat: no-repeat;
+    border: 0.1rem solid white;
+    transition: 0.5s all;
+  }
+
+  .boton-registro:hover {
+    background-position: 100% 100%;
+  }
+
+  .boton-registro:active {
+    background-color: #aa4400;
+  }
+
+  .inicio {
+    color: #ffffff;
+    padding-top: 20px;
+    text-align: center;
+  }
+
+  .inicio a {
+    text-decoration: none;
+    color: orangered;
+    cursor: var(--cursor-pointer);
+  }
+
+  .warnings {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 10px;
+    background: none;
+    height: 20px;
+    width: 100%;
+  }
+
+  .linea {
+    border-top: 0.1rem solid white;
+  }
+}

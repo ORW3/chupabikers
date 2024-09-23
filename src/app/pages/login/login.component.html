@@ -1,0 +1,50 @@
+<div class="fondo" id="fondo">
+  <div class="container">
+    <canvas id="canvas"></canvas>
+    <div id="forme">
+      <div class="bar">
+        <button type="submit" id="regresar" (click)="regresar()"></button>
+        <button type="submit" id="cerrar" onclick="window.location.href='./'"></button>
+      </div>
+      <div class="logo"><img src="assets/img/logo.png" /></div>
+      <h2 class="iniciar-sesion">Inicio</h2>
+      <form id="form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="rellenar">
+          <div class="nom">
+            <input id="correoElectronico" placeholder="Correo Electrónico" formControlName="correoElectronico"
+              type="correoElectronico" />
+          </div>
+          <div *ngIf="
+              loginForm.get('correoElectronico')?.invalid &&
+              loginForm.get('correoElectronico')?.touched
+            ">
+            <small class="warnings" *ngIf="loginForm.get('correoElectronico')?.errors?.['required']">Campo vacío</small>
+            <small class="warnings" *ngIf="loginForm.get('correoElectronico')?.errors?.['email']">Esto no es un correo electrónico</small>
+          </div>
+
+          <div class="pass">
+            <input placeholder="Contraseña" id="contrasena" formControlName="contrasena" type="password" />
+
+          </div>
+          <div *ngIf="
+                loginForm.get('contrasena')?.invalid &&
+                loginForm.get('contrasena')?.touched
+              ">
+            <small class="warnings" *ngIf="loginForm.get('contrasena')?.errors?.['required']">Campo vacío</small>
+            <small class="warnings" *ngIf="loginForm.get('contrasena')?.errors?.['minlength']">La contraseña debe tener al menos 6 caracteres</small>
+          </div>
+        </div>
+
+        <div class="warnings linea" id="warnings" *ngIf="errorMessage">
+          {{ errorMessage }}
+        </div>
+
+        <button class="boton-registro" type="submit" [disabled]="loginForm.invalid">Iniciar sesión</button>
+      </form>
+
+      <div class="inicio">
+        ¿No tienes una cuenta? <a href="/registro">Regístrate</a>
+      </div>
+    </div>
+  </div>
+</div>

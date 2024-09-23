@@ -1,0 +1,180 @@
+<div class="fondo" id="fondo">
+  <div class="container">
+    <canvas id="canvas"></canvas>
+    <div class="forme" id="forme">
+      <div class="bar">
+        <button type="submit" id="regresar" (click)="regresar()"></button>
+        <button type="submit" id="cerrar" onclick="window.location.href='./'"></button>
+      </div>
+      <div class="logo"><img src="assets/img/logo.png" /></div>
+      <h2 class="registro">Registro</h2>
+      <form id="form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="rellenar">
+
+
+          <div class="fotoBici">
+            <div class="contenedor-button">
+              <label for="fotoBiciSubir">Sube una foto tuya con tu bici para darte la bienvenida al evento</label>
+              <button [disabled]="this.fotoBiciForm !== ''" (click)="subirImagenBici(); subirImgBiciClick = true" id="fotoBiciSubir" class="cloudinary-button">Subir archivo</button>
+            </div>
+          </div>
+          <div *ngIf="registerForm.invalid && subirImgBiciClick">
+            <small class="warnings" *ngIf="this.fotoBiciForm === ''">Foto requerida</small>
+          </div>
+          
+
+          <div class="logoF">
+            <div class="contenedor-button2">
+              <label for="fotoLogoSubir">Sube el logo de tu equipo (opcional)</label>
+              <button [disabled]="this.logoForm !== ''" (click)="subirImagenLogo()" id="fotoLogoSubir" class="cloudinary-button">Subir archivo</button>
+            </div>
+          </div>
+          
+          <div class="nom">
+            <input placeholder="Nombre Completo" id="nombreCompleto" formControlName="nombreCompleto" type="text" />
+          </div>
+          <div *ngIf="
+              registerForm.get('nombreCompleto')?.invalid &&
+              registerForm.get('nombreCompleto')?.touched
+            ">
+            <small class="warnings" *ngIf="registerForm.get('nombreCompleto')?.errors?.['required']">Nombre Completo es
+              requerido</small>
+          </div>
+
+          <div class="pass">
+            <input placeholder="Contraseña" id="contrasena" formControlName="contrasena" type="password" />
+          </div>
+          <div *ngIf="
+              registerForm.get('contrasena')?.invalid &&
+              registerForm.get('contrasena')?.touched
+            ">
+            <small class="warnings" *ngIf="registerForm.get('contrasena')?.errors?.['required']">Contraseña es
+              requerida</small>
+            <small class="warnings" *ngIf="registerForm.get('contrasena')?.errors?.['minlength']">Contraseña debe tener
+              al menos 6
+              caracteres</small>
+          </div>
+
+          <div class="mtb">
+            <input placeholder="Equipo MTB" id="equipoMTB" formControlName="equipoMTB" type="text" />
+          </div>
+
+          <div class="correo">
+            <input placeholder="Correo Electrónico" id="correoElectronico" formControlName="correoElectronico"
+              type="email" />
+          </div>
+          <div *ngIf="
+              registerForm.get('correoElectronico')?.invalid &&
+              registerForm.get('correoElectronico')?.touched
+            ">
+            <small class="warnings" *ngIf="registerForm.get('correoElectronico')?.errors?.['required']">Correo
+              Electrónico es
+              requerido</small>
+            <small class="warnings" *ngIf="registerForm.get('correoElectronico')?.errors?.['email']">Ingrese un correo
+              electrónico
+              válido</small>
+          </div>
+
+          <div class="telefono">
+            <input placeholder="Número de Teléfono" id="numeroCelular" formControlName="numeroCelular" type="text" />
+
+
+          </div>
+          <div *ngIf="
+              registerForm.get('numeroCelular')?.invalid &&
+              registerForm.get('numeroCelular')?.touched
+            ">
+            <small class="warnings" *ngIf="registerForm.get('numeroCelular')?.errors?.['required']">
+              Número de teléfono requerido</small>
+            <small class="warnings" *ngIf="registerForm.get('numeroCelular')?.errors?.['minlength']">El número de
+              teléfono debe tener al
+              menos
+              10 caracteres</small>
+          </div>
+
+          <div class="contacto">
+            <input placeholder="Contacto de Emergencia" id="contactoEmergencia" formControlName="contactoEmergencia"
+              type="text" />
+          </div>
+          <div *ngIf="
+              registerForm.get('contactoEmergencia')?.invalid &&
+              registerForm.get('contactoEmergencia')?.touched
+            ">
+            <small class="warnings" *ngIf="registerForm.get('contactoEmergencia')?.errors?.['required']">
+              Contacto de emergencia requerido</small>
+            <small class="warnings" *ngIf="registerForm.get('contactoEmergencia')?.errors?.['minlength']">El contacto de
+              emergencia
+              debe tener
+              al menos 10 caracteres</small>
+          </div>
+
+          <div class="edad">
+            <input placeholder="Edad" id="edad" formControlName="edad" type="number" min="12" />
+          </div>
+          <div *ngIf="
+              registerForm.get('edad')?.invalid && registerForm.get('edad')?.touched
+            ">
+            <small class="warnings" *ngIf="registerForm.get('edad')?.errors?.['required']">Edad es requerida</small>
+            <small class="warnings" *ngIf="registerForm.get('edad')?.errors?.['min']">La edad debe ser mayor a
+              12</small>
+          </div>
+
+          <div class="sangre">
+            <div class="contenedor-select">
+              <label for="tipoSangre">Sangre</label>
+              <select id="tipoSangre" formControlName="tipoSangre">
+                <option value="" disabled selected>Selecciona un tipo</option>
+                <option *ngFor="let tipo of tiposSangre" [value]="tipo">
+                  {{ tipo }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div *ngIf="
+              registerForm.get('tipoSangre')?.invalid &&
+              registerForm.get('tipoSangre')?.touched
+            ">
+            <small class="warnings" *ngIf="registerForm.get('tipoSangre')?.errors?.['required']">Tipo de Sangre es
+              requerido</small>
+          </div>
+
+          <div class="sexo">
+            <div class="contenedor-select"><label for="sexo">Género</label>
+              <select id="sexo" formControlName="sexo">
+                <option value="" disabled selected>Selecciona un género</option>
+                <option *ngFor="let sexo of sexos" [value]="sexo">{{ sexo }}</option>
+              </select>
+            </div>
+          </div>
+          <div *ngIf="
+              registerForm.get('sexo')?.invalid && registerForm.get('sexo')?.touched
+            ">
+            <small class="warnings" *ngIf="registerForm.get('sexo')?.errors?.['required']">Sexo es requerido</small>
+          </div>
+
+          <div class="estado">
+            <div class="contenedor-select"><label for="estado">Estado</label>
+              <select id="estado" formControlName="estado">
+                <option value="" disabled selected>Selecciona un estado</option>
+                <option *ngFor="let estado of estados" [value]="estado">
+                  {{ estado }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div *ngIf="
+              registerForm.get('estado')?.invalid &&
+              registerForm.get('estado')?.touched
+            ">
+            <small class="warnings" *ngIf="registerForm.get('estado')?.errors?.['required']">Estado es requerido</small>
+          </div>
+        </div>
+
+        <div class="warnings linea" id="warnings" *ngIf="errorMessage">
+          <p>{{ errorMessage }}</p>
+        </div>
+        <button class="boton-registro" type="submit" [disabled]="registerForm.invalid">Registrar</button>
+      </form>
+    </div>
+  </div>
+</div>
