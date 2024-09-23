@@ -8,7 +8,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "deploy": "npm run build && gh-pages -d dist/mtb/browser"
+    "deploy": "npm run build && gh-pages -d dist/mtb/browser",
+    "start-pwa": "ng build --base-href=/ && npm run start"
   },
   "private": true,
   "dependencies": {

@@ -21,6 +21,6 @@ export class RutasService {
   }
 
   irOrdenes(){
-    window.location.href = '/ordenes';
+    window.location.href = './ordenes';
   }
 }

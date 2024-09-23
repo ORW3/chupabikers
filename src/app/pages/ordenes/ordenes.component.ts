@@ -22,6 +22,7 @@ declare function animacion(): any;
   styleUrl: './ordenes.component.css',
 })
 export class OrdenesComponent implements OnInit {
+  anchoPantalla: any;
   rutas: any;
   isLoggedIn: boolean = false;
   ordenes: any = [];
@@ -220,5 +221,15 @@ export class OrdenesComponent implements OnInit {
     return desafio
       ? `${desafio.nombreDesafio} ${desafio.numeroDesafio}`
       : 'Desafío no encontrado';
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.anchoPantalla = window.innerWidth;
+    if (this.anchoPantalla <= 767) {
+      this.mostrar = false;
+    } else {
+      this.mostrar = true;
+    }
   }
 }
