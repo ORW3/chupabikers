@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1727064177953,
+  "timestamp": 1727421358797,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -11,9 +11,12 @@
         "ignoreVary": true
       },
       "urls": [
+        "/assets/sounds/bell.wav",
+        "/assets/sounds/rotating.wav",
         "/favicon.ico",
+        "/firebase-messaging-sw.js",
         "/index.html",
-        "/main-DVFU6MC6.js",
+        "/main-ALQUFY47.js",
         "/manifest.webmanifest",
         "/polyfills-SCHOHYNV.js",
         "/styles-V5QHCHTK.css"
@@ -47,8 +50,6 @@
         "/assets/img/wheel.png",
         "/assets/js/script.js",
         "/assets/js/window.curDot.min.js",
-        "/assets/sounds/bell.wav",
-        "/assets/sounds/rotating.wav",
         "/assets/svg/cart-shopping-solid.svg",
         "/media/KCDJHi-Jacker-GZL3BGVO.otf",
         "/media/default-T3FIH3AR.svg",
@@ -59,7 +60,23 @@
       "patterns": []
     }
   ],
-  "dataGroups": [],
+  "dataGroups": [
+    {
+      "name": "data-api",
+      "patterns": [
+        "https:\\/\\/mtbapi\\.onrender\\.com\\/api\\/ordenes",
+        "https:\\/\\/mtbapi\\.onrender\\.com\\/api\\/desafios"
+      ],
+      "strategy": "freshness",
+      "maxSize": 5,
+      "maxAge": 3000000,
+      "timeoutMs": 5000,
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "version": 1
+    }
+  ],
   "hashTable": {
     "/assets/cursor/default.svg": "dd82f2eec2d711ca08f2567af831eda1a95e4785",
     "/assets/cursor/pointer.svg": "26a9e0769e42d62db2753f20970d9d2f22e28f10",
@@ -84,8 +101,9 @@
     "/assets/sounds/rotating.wav": "bdcaa14c23d02245cfda2ba5cbf182a0e6fe9446",
     "/assets/svg/cart-shopping-solid.svg": "f6adcb1d10fbec2fdc2f2423c73bd9f89b68cb95",
     "/favicon.ico": "9c39f434fe1261f68c5e3eefdf734630d99c5670",
-    "/index.html": "ce22bc0f236895e8258662d9b18c5b6c611192b0",
-    "/main-DVFU6MC6.js": "d97b57a77b3d870adc801d33cb92294883ff26db",
+    "/firebase-messaging-sw.js": "d90849002bd48365bd30e3ed9741a8eba58bf715",
+    "/index.html": "6cacdc436306388e92f7e69e279311bb3b797982",
+    "/main-ALQUFY47.js": "b50ff0a421172ec50dc45ca59105bdd04c97f4a6",
     "/manifest.webmanifest": "f4a3f079c560c4db1fdfda74892afca9812064c2",
     "/media/KCDJHi-Jacker-GZL3BGVO.otf": "9b8ce025eb7f5f69ee0e82a2c1fcb92a9956855c",
     "/media/default-T3FIH3AR.svg": "dd82f2eec2d711ca08f2567af831eda1a95e4785",
