@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1727421358797,
+  "timestamp": 1727642297303,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -16,7 +16,7 @@
         "/favicon.ico",
         "/firebase-messaging-sw.js",
         "/index.html",
-        "/main-ALQUFY47.js",
+        "/main-4BX4QLVS.js",
         "/manifest.webmanifest",
         "/polyfills-SCHOHYNV.js",
         "/styles-V5QHCHTK.css"
@@ -51,6 +51,7 @@
         "/assets/js/script.js",
         "/assets/js/window.curDot.min.js",
         "/assets/svg/cart-shopping-solid.svg",
+        "/assets/svg/mountain-4.svg",
         "/media/KCDJHi-Jacker-GZL3BGVO.otf",
         "/media/default-T3FIH3AR.svg",
         "/media/grain-UZRHAT7Y.png",
@@ -100,10 +101,11 @@
     "/assets/sounds/bell.wav": "d172b1219742ddc38a71e5881bc65ae662316b65",
     "/assets/sounds/rotating.wav": "bdcaa14c23d02245cfda2ba5cbf182a0e6fe9446",
     "/assets/svg/cart-shopping-solid.svg": "f6adcb1d10fbec2fdc2f2423c73bd9f89b68cb95",
+    "/assets/svg/mountain-4.svg": "ee21cc721b2daed3ff493c7acee5b28f36dabf69",
     "/favicon.ico": "9c39f434fe1261f68c5e3eefdf734630d99c5670",
     "/firebase-messaging-sw.js": "d90849002bd48365bd30e3ed9741a8eba58bf715",
-    "/index.html": "6cacdc436306388e92f7e69e279311bb3b797982",
-    "/main-ALQUFY47.js": "b50ff0a421172ec50dc45ca59105bdd04c97f4a6",
+    "/index.html": "35ffb77ec7978943722b95ff87abcacf783806a7",
+    "/main-4BX4QLVS.js": "1cb303f8cd141a0aeaaecc536957ed64a858d77a",
     "/manifest.webmanifest": "f4a3f079c560c4db1fdfda74892afca9812064c2",
     "/media/KCDJHi-Jacker-GZL3BGVO.otf": "9b8ce025eb7f5f69ee0e82a2c1fcb92a9956855c",
     "/media/default-T3FIH3AR.svg": "dd82f2eec2d711ca08f2567af831eda1a95e4785",
