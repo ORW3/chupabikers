@@ -15,7 +15,6 @@ function principal() {
     };
 
     window.onscrollend = function () {
-        road.classList.remove("animate-road-up");
         document
             .querySelectorAll(".leftTyre, .rightTyre, .pedals, .rightLeg, .calf")
             .forEach((el) => (el.style.animationPlayState = "paused"));
@@ -23,8 +22,6 @@ function principal() {
 
     window.onscroll = function () {
         if (lastScrollY < window.scrollY) {
-            console.log(lastScrollY);
-            road.classList.add("animate-road-up");
 
             // Activa otras animaciones hacia arriba (scroll hacia abajo)
             document
@@ -33,8 +30,6 @@ function principal() {
 
             lastScrollY = window.scrollY;
         } else {
-            // Detiene todas las animaciones
-            road.classList.remove("animate-road-up");
 
             document
                 .querySelectorAll(".leftTyre, .rightTyre, .pedals, .rightLeg, .calf")
