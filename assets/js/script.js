@@ -282,189 +282,86 @@ function animacion() {
 function animacionIn() {
     const canvas = document.getElementById("canvas");
     const c = canvas.getContext("2d");
-
-
-
-    // size of canvas
     const imgSize = 512;
-
+    const mapSize = 1024;
     canvas.width = imgSize;
     canvas.height = imgSize;
 
-    // init image data with black pixels
     const image = c.createImageData(imgSize, imgSize);
-    for (let i = 0; i < image.data.length; i += 4) {
-        image.data[i] = 0; // R
-        image.data[i + 1] = 0; // G
-        image.data[i + 2] = 0; // B
-        image.data[i + 3] = 255; // A
-    }
+    image.data.fill(0);
+    for (let i = 3; i < image.data.length; i += 4) image.data[i] = 255;
 
-    // size of our height maps
-    const mapSize = 1024;
-
-    // returns the distance of point x,y from the origin 0,0
     const distance = (x, y) => Math.sqrt(x * x + y * y);
 
-    // init height map 1
-    const heightMap1 = [];
-    for (let u = 0; u < mapSize; u++) {
-        for (let v = 0; v < mapSize; v++) {
-            // index of coordinate in height map array
-            const i = u * mapSize + v;
-
-            // u,v are coordinates with origin at upper left corner
-            // cx and cy are coordinates with origin at the
-            // center of the map
-            const cx = u - mapSize / 2;
-            const cy = v - mapSize / 2;
-
-            // distance from middle of map
-            const d = distance(cx, cy);
-
-            // stretching so we get the desired ripple density on our map
-            const stretch = (3 * Math.PI) / (mapSize / 2);
-
-            // wavy height value between -1 and 1
-            const ripple = Math.sin(d * stretch);
-
-            // wavy height value normalized to 0..1
-            const normalized = (ripple + 1) / 2;
-
-            // height map value 0..128, integer
-            heightMap1[i] = Math.floor(normalized * 128);
+    const generateHeightMap = (callback) => {
+        const heightMap = new Array(mapSize * mapSize);
+        for (let u = 0; u < mapSize; u++) {
+            for (let v = 0; v < mapSize; v++) {
+                const i = u * mapSize + v;
+                heightMap[i] = callback(u, v);
+            }
         }
-    }
-
-    const heightMap2 = [];
-    for (let u = 0; u < mapSize; u++) {
-        for (let v = 0; v < mapSize; v++) {
-            const i = u * mapSize + v;
-            const cx = u - mapSize / 2;
-            const cy = v - mapSize / 2;
-
-            // skewed distance as input to chaos field calculation,
-            // scaled for smoothness over map distance
-            const d1 = distance(0.8 * cx, 1.3 * cy) * 0.022;
-            const d2 = distance(1.35 * cx, 0.45 * cy) * 0.022;
-
-            const s = Math.sin(d1);
-            const c = Math.cos(d2);
-            // height value between -2 and +2
-            const h = s + c;
-
-            // height value between 0..1
-            const normalized = (h + 2) / 4;
-            // height value between 0..127, integer
-            heightMap2[i] = Math.floor(normalized * 127);
-        }
-    }
-
-    // color helpers
-
-    const interpolate = (c1, c2, f) => {
-        return {
-            r: Math.floor(c1.r + (c2.r - c1.r) * f),
-            g: Math.floor(c1.g + (c2.g - c1.g) * f),
-            b: Math.floor(c1.b + (c2.b - c1.b) * f)
-        };
+        return heightMap;
     };
 
-    // returns a random color
-    const randomColor = () => {
-        const r = Math.floor(Math.random() * 255);
-        const g = Math.floor(Math.random() * 255);
-        const b = Math.floor(Math.random() * 255);
-        return { r, g, b };
+    const heightMap1 = generateHeightMap((u, v) => {
+        const cx = u - mapSize / 2, cy = v - mapSize / 2;
+        const d = distance(cx, cy);
+        const stretch = (3 * Math.PI) / (mapSize / 2);
+        const ripple = Math.sin(d * stretch);
+        return Math.floor(((ripple + 1) / 2) * 128);
+    });
+
+    const heightMap2 = generateHeightMap((u, v) => {
+        const cx = u - mapSize / 2, cy = v - mapSize / 2;
+        const d1 = distance(0.8 * cx, 1.3 * cy) * 0.022;
+        const d2 = distance(1.35 * cx, 0.45 * cy) * 0.022;
+        const h = Math.sin(d1) + Math.cos(d2);
+        return Math.floor(((h + 2) / 4) * 127);
+    });
+
+    const interpolate = (c1, c2, f) => ({
+        r: Math.floor(c1.r + (c2.r - c1.r) * f),
+        g: Math.floor(c1.g + (c2.g - c1.g) * f),
+        b: Math.floor(c1.b + (c2.b - c1.b) * f)
+    });
+
+    const randomColor = () => ({
+        r: Math.floor(Math.random() * 255),
+        g: Math.floor(Math.random() * 255),
+        b: Math.floor(Math.random() * 255)
+    });
+
+    const makeFiveColorGradient = (colors) => {
+        const gradient = [];
+        for (let i = 0; i < 256; i++) {
+            const index = Math.floor(i / 64);
+            const f = (i % 64) / 64;
+            gradient[i] = interpolate(colors[index], colors[index + 1], f);
+        }
+        return gradient;
     };
 
-    // returns a random color palette with 256 color entries
-    const makeRandomPalette = () => {
-        const c1 = randomColor();
-        const c2 = randomColor();
-        const c3 = randomColor();
-        const c4 = randomColor();
-        const c5 = randomColor();
+    let dx1 = 0, dy1 = 0, dx2 = 0, dy2 = 0;
 
-        return makeFiveColorGradient(c1, c2, c3, c4, c5);
-    };
-
-    const makeFiveColorGradient = (c1, c2, c3, c4, c5) => {
-        const g = [];
-
-        for (let i = 0; i < 64; i++) {
-            const f = i / 64;
-            g[i] = interpolate(c1, c2, f);
-        }
-
-        for (let i = 64; i < 128; i++) {
-            const f = (i - 64) / 64;
-            g[i] = interpolate(c2, c3, f);
-        }
-
-        for (let i = 128; i < 192; i++) {
-            const f = (i - 128) / 64;
-            g[i] = interpolate(c3, c4, f);
-        }
-
-        for (let i = 192; i < 256; i++) {
-            const f = (i - 192) / 64;
-            g[i] = interpolate(c4, c5, f);
-        }
-
-        return g;
-    };
-
-    // offsets for moving height maps
-    let dx1 = 0;
-    let dy1 = 0;
-
-    let dx2 = 0;
-    let dy2 = 0;
-
-    // adjust height maps offsets
-    const moveHeightMaps = t => {
-        dx1 = Math.floor(
-            (((Math.cos(t * 0.0002 + 0.4 + Math.PI) + 1) / 2) * mapSize) / 2
-        );
+    const moveHeightMaps = (t) => {
+        dx1 = Math.floor((((Math.cos(t * 0.0002 + 0.4 + Math.PI) + 1) / 2) * mapSize) / 2);
         dy1 = Math.floor((((Math.cos(t * 0.0003 - 0.1) + 1) / 2) * mapSize) / 2);
         dx2 = Math.floor((((Math.cos(t * -0.0002 + 1.2) + 1) / 2) * mapSize) / 2);
-        dy2 = Math.floor(
-            (((Math.cos(t * -0.0003 - 0.8 + Math.PI) + 1) / 2) * mapSize) / 2
-        );
+        dy2 = Math.floor((((Math.cos(t * -0.0003 - 0.8 + Math.PI) + 1) / 2) * mapSize) / 2);
     };
 
-    // two palettes we interpolate between
-    const palettes = [makeRandomPalette(), makeRandomPalette()];
+    const palettes = [makeFiveColorGradient([randomColor(), randomColor(), randomColor(), randomColor(), randomColor()]), makeFiveColorGradient([randomColor(), randomColor(), randomColor(), randomColor(), randomColor()])];
+    let palette = [], prevDirection = 1;
 
-    // current palette is edstablished durting animation
-    let palette = [];
-
-    // stores whether we're interpolating colors
-    // from palette 0 -> 1 (1) or 1 -> 0 (-1)
-    let prevDirection = 1;
-
-    const updatePalette = t => {
-        const timeScale = 0.0005;
-        const x = t * timeScale;
-
-        // normalized value 0..1 used to interpolate palette colors
+    const updatePalette = (t) => {
+        const x = t * 0.0005;
         const inter = (Math.cos(x) + 1) / 2;
-
-        // did we switch direction, and should ergo pick a new palette
-        // random palette to interpolate towards?
-
         const direction = -Math.sin(x) >= 0 ? 1 : -1;
         if (prevDirection != direction) {
             prevDirection = direction;
-            if (direction == -1) {
-                palettes[0] = makeRandomPalette();
-            } else {
-                palettes[1] = makeRandomPalette();
-            }
+            palettes[direction === -1 ? 0 : 1] = makeFiveColorGradient([randomColor(), randomColor(), randomColor(), randomColor(), randomColor()]);
         }
-
-        // create interpolated palette for current frame
         for (let i = 0; i < 256; i++) {
             palette[i] = interpolate(palettes[0][i], palettes[1][i], inter);
         }
@@ -473,23 +370,11 @@ function animacionIn() {
     const updateImageData = () => {
         for (let u = 0; u < imgSize; u++) {
             for (let v = 0; v < imgSize; v++) {
-                // indexes into height maps for pixel
                 const i = (u + dy1) * mapSize + (v + dx1);
                 const k = (u + dy2) * mapSize + (v + dx2);
-
-                // index for pixel in image data
-                // remember it's 4 bytes per pixel
                 const j = u * imgSize * 4 + v * 4;
-
-                // height value of 0..255
-                let h = heightMap1[i] + heightMap2[k];
-                // get color value from current palette
-                let c = palette[h];
-
-                // h = heightMap2[i];
-                // c = { r: h, g: h, b: h };
-
-                // set pixel data
+                const h = heightMap1[i] + heightMap2[k];
+                const c = palette[h];
                 image.data[j] = c.r;
                 image.data[j + 1] = c.g;
                 image.data[j + 2] = c.b;
@@ -497,37 +382,16 @@ function animacionIn() {
         }
     };
 
-    // helper to create a linear gradient palette
-    const linearGradient = (c1, c2) => {
-        const g = [];
-
-        // interpolate between the colors
-        // in the gradient
-
-        for (let i = 0; i < 256; i++) {
-            const f = i / 255;
-            g[i] = interpolate(c1, c2, f);
-        }
-
-        return g;
-    };
-
-    const tick = time => {
+    const tick = (time) => {
         moveHeightMaps(time);
         updatePalette(time);
         updateImageData();
-
         c.putImageData(image, 0, 0);
 
-        // Add inset shadow
-        const shadowSize = 50; // Adjust this value to change the shadow size
-        const gradient = c.createRadialGradient(
-            imgSize / 2, imgSize / 2, imgSize / 2 - shadowSize,
-            imgSize / 2, imgSize / 2, imgSize / 2
-        );
+        const shadowSize = 50;
+        const gradient = c.createRadialGradient(imgSize / 2, imgSize / 2, imgSize / 2 - shadowSize, imgSize / 2, imgSize / 2, imgSize / 2);
         gradient.addColorStop(0, 'rgba(0, 0, 0, 0)');
         gradient.addColorStop(1, 'rgba(14, 16, 18, 1)');
-
         c.fillStyle = gradient;
         c.fillRect(0, 0, imgSize, imgSize);
 
