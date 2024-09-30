@@ -1,34 +1,39 @@
 function principal() {
     let lastScrollY = window.scrollY;
-    const elementsToAnimate = document.querySelectorAll(".leftTyre, .rightTyre, .pedals, .rightLeg, .calf");
+    document
+        .querySelectorAll(".leftTyre, .rightTyre, .pedals, .rightLeg, .calf")
+        .forEach((el) => (el.style.animationPlayState = "paused"));
 
-    const toggleAnimation = (shouldRun) => {
-        elementsToAnimate.forEach((el) => {
-            el.style.animationPlayState = shouldRun ? "running" : "paused";
-        });
-    };
-
-    document.querySelector(".navmark").onclick = () => {
+    document.querySelector(".navmark").onclick = function () {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-        if (!ticking) {
-            window.requestAnimationFrame(() => {
-                if (lastScrollY < window.scrollY) {
-                    toggleAnimation(true);
-                } else {
-                    toggleAnimation(false);
-                }
-                lastScrollY = window.scrollY;
-                ticking = false;
-            });
-            ticking = true;
-        }
-    });
-}
+    window.onscrollend = function () {
+        document
+            .querySelectorAll(".leftTyre, .rightTyre, .pedals, .rightLeg, .calf")
+            .forEach((el) => (el.style.animationPlayState = "paused"));
+    };
 
+    window.onscroll = function () {
+        if (lastScrollY < window.scrollY) {
+
+            // Activa otras animaciones hacia arriba (scroll hacia abajo)
+            document
+                .querySelectorAll(".leftTyre, .rightTyre, .pedals, .rightLeg, .calf")
+                .forEach((el) => (el.style.animationPlayState = "running"));
+
+            lastScrollY = window.scrollY;
+        } else {
+
+            document
+                .querySelectorAll(".leftTyre, .rightTyre, .pedals, .rightLeg, .calf")
+                .forEach((el) => (el.style.animationPlayState = "paused"));
+
+            lastScrollY = window.scrollY;
+        }
+    };
+
+}
 
 function animacion() {
     const canvas = document.getElementById("canvas");

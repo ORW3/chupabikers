@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1727681250321,
+  "timestamp": 1727681378428,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -96,7 +96,7 @@
     "/assets/img/logo.png": "77903105e28cbd4c1fec86cc534bd4e022a93610",
     "/assets/img/no.png": "5a04be9cded8b7b71974d44da86753877b53ef93",
     "/assets/img/wheel.png": "56539abe1491448ced6255d50d3a13cd3d801314",
-    "/assets/js/script.js": "abbb980ca03763c08684848f9c97f6ad40e73844",
+    "/assets/js/script.js": "86261fcecb5e32e7635fcb2515b739933a51e0d0",
     "/assets/js/window.curDot.min.js": "9052927fe2e68965e531b7c95df9f8533247aa9b",
     "/assets/sounds/bell.wav": "d172b1219742ddc38a71e5881bc65ae662316b65",
     "/assets/sounds/rotating.wav": "bdcaa14c23d02245cfda2ba5cbf182a0e6fe9446",
