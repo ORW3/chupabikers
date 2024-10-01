@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1727683263446,
+  "timestamp": 1727741704394,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -19,7 +19,7 @@
         "/main-26KM3ES6.js",
         "/manifest.webmanifest",
         "/polyfills-SCHOHYNV.js",
-        "/styles-E34UI65Q.css"
+        "/styles-USJVTAQQ.css"
       ],
       "patterns": []
     },
@@ -49,12 +49,11 @@
         "/assets/img/no.png",
         "/assets/img/wheel.png",
         "/assets/js/script.js",
-        "/assets/js/window.curDot.min.js",
         "/assets/svg/cart-shopping-solid.svg",
         "/assets/svg/mountain-4.svg",
         "/media/KCDJHi-Jacker-GZL3BGVO.otf",
         "/media/default-T3FIH3AR.svg",
-        "/media/grain-UZRHAT7Y.png",
+        "/media/grain-VOYYBXYK.png",
         "/media/pointer-HTWTJPFM.svg",
         "/media/text-VZMR6H2H.svg"
       ],
@@ -91,29 +90,28 @@
     "/assets/icons/icon-512x512.png": "83dbdb86aec61058e1cd218749e8217d4e790d90",
     "/assets/icons/icon-72x72.png": "8150fd7cb87346a1ca59d67814f73e7b930baf5d",
     "/assets/icons/icon-96x96.png": "b73d4e419e08d45099b41e7ae727021ec0c696b1",
-    "/assets/img/grain.png": "94282e7e76b5a7c6196f315a994013e36df7f1f9",
-    "/assets/img/imagen-tarjeta.jpg": "b364b8ee13aea10fe4734df3bea47f2de02e825e",
-    "/assets/img/logo.png": "77903105e28cbd4c1fec86cc534bd4e022a93610",
-    "/assets/img/no.png": "5a04be9cded8b7b71974d44da86753877b53ef93",
-    "/assets/img/wheel.png": "56539abe1491448ced6255d50d3a13cd3d801314",
-    "/assets/js/script.js": "82b628d8a202cb6b3c1b013e81835e47a5cfa272",
-    "/assets/js/window.curDot.min.js": "9052927fe2e68965e531b7c95df9f8533247aa9b",
+    "/assets/img/grain.png": "93df69e164ed6836efd1197875bc899d9829b49b",
+    "/assets/img/imagen-tarjeta.jpg": "2a4e749750c5cc3f27686ef28ff6e3449bb18eec",
+    "/assets/img/logo.png": "c80bae1e2e685e7a5f59852d7dfd2d28d58687e2",
+    "/assets/img/no.png": "83f5b90d8286aadbff2823b3b17e607768face41",
+    "/assets/img/wheel.png": "f6f5b4c73f234044e81a3536240e3d56ac0995a0",
+    "/assets/js/script.js": "994cb378091bf442dd589859dc42721ddc27e461",
     "/assets/sounds/bell.wav": "d172b1219742ddc38a71e5881bc65ae662316b65",
     "/assets/sounds/rotating.wav": "bdcaa14c23d02245cfda2ba5cbf182a0e6fe9446",
     "/assets/svg/cart-shopping-solid.svg": "f6adcb1d10fbec2fdc2f2423c73bd9f89b68cb95",
     "/assets/svg/mountain-4.svg": "ee21cc721b2daed3ff493c7acee5b28f36dabf69",
     "/favicon.ico": "9c39f434fe1261f68c5e3eefdf734630d99c5670",
     "/firebase-messaging-sw.js": "d90849002bd48365bd30e3ed9741a8eba58bf715",
-    "/index.html": "6b731030cf2deb268b0d7955126f39e86ccda8fa",
+    "/index.html": "3ebb554a8817abdfaaf75ef4cb3ba1ad586e549a",
     "/main-26KM3ES6.js": "5e656425a3ca279b70d38ea75e763a2618ac88b2",
     "/manifest.webmanifest": "f4a3f079c560c4db1fdfda74892afca9812064c2",
     "/media/KCDJHi-Jacker-GZL3BGVO.otf": "9b8ce025eb7f5f69ee0e82a2c1fcb92a9956855c",
     "/media/default-T3FIH3AR.svg": "dd82f2eec2d711ca08f2567af831eda1a95e4785",
-    "/media/grain-UZRHAT7Y.png": "94282e7e76b5a7c6196f315a994013e36df7f1f9",
+    "/media/grain-VOYYBXYK.png": "93df69e164ed6836efd1197875bc899d9829b49b",
     "/media/pointer-HTWTJPFM.svg": "26a9e0769e42d62db2753f20970d9d2f22e28f10",
     "/media/text-VZMR6H2H.svg": "7777edaecfa0b72509f47d4b917aade74bc1b53f",
     "/polyfills-SCHOHYNV.js": "d45c76c5960bab3ace7fd6d211b9579456241f8a",
-    "/styles-E34UI65Q.css": "9e146833f6d7e988f4d64577dbc9c53147254aa2"
+    "/styles-USJVTAQQ.css": "c769b55de6738dccfaf7fa8ffbd7dde8517752e5"
   },
   "navigationUrls": [
     {
