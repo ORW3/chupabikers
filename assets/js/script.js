@@ -1,1 +1,654 @@
-function principal(){let lastScrollY=window.scrollY;document.querySelectorAll(".leftTyre, .rightTyre, .pedals, .rightLeg, .calf").forEach((el=>el.style.animationPlayState="paused")),document.querySelector(".navmark").onclick=function(){window.scrollTo({top:0,behavior:"smooth"})},window.onscrollend=function(){document.querySelectorAll(".leftTyre, .rightTyre, .pedals, .rightLeg, .calf").forEach((el=>el.style.animationPlayState="paused"))},window.onscroll=function(){lastScrollY<window.scrollY?(document.querySelectorAll(".leftTyre, .rightTyre, .pedals, .rightLeg, .calf").forEach((el=>el.style.animationPlayState="running")),lastScrollY=window.scrollY):(document.querySelectorAll(".leftTyre, .rightTyre, .pedals, .rightLeg, .calf").forEach((el=>el.style.animationPlayState="paused")),lastScrollY=window.scrollY)}}function animacion(){const canvas=document.getElementById("canvas"),c=canvas.getContext("2d");canvas.width=512,canvas.height=512;const image=c.createImageData(512,512);for(let i=0;i<image.data.length;i+=4)image.data[i]=0,image.data[i+1]=0,image.data[i+2]=0,image.data[i+3]=255;const distance=(x,y)=>Math.sqrt(x*x+y*y),heightMap1=[];for(let u=0;u<1024;u++)for(let v=0;v<1024;v++){const i=1024*u+v,d=distance(u-512,v-512),stretch=3*Math.PI/512,normalized=(Math.sin(d*stretch)+1)/2;heightMap1[i]=Math.floor(128*normalized)}const heightMap2=[];for(let u=0;u<1024;u++)for(let v=0;v<1024;v++){const i=1024*u+v,cx=u-512,cy=v-512,d1=.022*distance(.8*cx,1.3*cy),d2=.022*distance(1.35*cx,.45*cy),normalized=(Math.sin(d1)+Math.cos(d2)+2)/4;heightMap2[i]=Math.floor(127*normalized)}const interpolate=(c1,c2,f)=>({r:Math.floor(c1.r+(c2.r-c1.r)*f),g:Math.floor(c1.g+(c2.g-c1.g)*f),b:Math.floor(c1.b+(c2.b-c1.b)*f)}),randomColor=()=>({r:Math.floor(255*Math.random()),g:Math.floor(255*Math.random()),b:Math.floor(255*Math.random())}),makeRandomPalette=()=>{const c1=randomColor(),c2=randomColor(),c3=randomColor(),c4=randomColor(),c5=randomColor();return makeFiveColorGradient(c1,c2,c3,c4,c5)},makeFiveColorGradient=(c1,c2,c3,c4,c5)=>{const g=[];for(let i=0;i<64;i++){const f=i/64;g[i]=interpolate(c1,c2,f)}for(let i=64;i<128;i++){const f=(i-64)/64;g[i]=interpolate(c2,c3,f)}for(let i=128;i<192;i++){const f=(i-128)/64;g[i]=interpolate(c3,c4,f)}for(let i=192;i<256;i++){const f=(i-192)/64;g[i]=interpolate(c4,c5,f)}return g};let dx1=0,dy1=0,dx2=0,dy2=0;const palettes=[makeRandomPalette(),makeRandomPalette()];let palette=[],prevDirection=1;const tick=time=>{var t;t=time,dx1=Math.floor((Math.cos(2e-4*t+.4+Math.PI)+1)/2*1024/2),dy1=Math.floor((Math.cos(3e-4*t-.1)+1)/2*1024/2),dx2=Math.floor((Math.cos(-2e-4*t+1.2)+1)/2*1024/2),dy2=Math.floor((Math.cos(-3e-4*t-.8+Math.PI)+1)/2*1024/2),(t=>{const x=5e-4*t,inter=(Math.cos(x)+1)/2,direction=-Math.sin(x)>=0?1:-1;prevDirection!=direction&&(prevDirection=direction,-1==direction?palettes[0]=makeRandomPalette():palettes[1]=makeRandomPalette());for(let i=0;i<256;i++)palette[i]=interpolate(palettes[0][i],palettes[1][i],inter)})(time),(()=>{for(let u=0;u<512;u++)for(let v=0;v<512;v++){const k=1024*(u+dy2)+(v+dx2),j=512*u*4+4*v;let h=heightMap1[1024*(u+dy1)+(v+dx1)]+heightMap2[k],c=palette[h];image.data[j]=c.r,image.data[j+1]=c.g,image.data[j+2]=c.b}})(),c.putImageData(image,0,0),requestAnimationFrame(tick)};requestAnimationFrame(tick)}function animacionIn(){const canvas=document.getElementById("canvas"),c=canvas.getContext("2d");canvas.width=512,canvas.height=512;const image=c.createImageData(512,512);image.data.fill(0);for(let i=3;i<image.data.length;i+=4)image.data[i]=255;const distance=(x,y)=>Math.sqrt(x*x+y*y),generateHeightMap=callback=>{const heightMap=new Array(1048576);for(let u=0;u<1024;u++)for(let v=0;v<1024;v++){heightMap[1024*u+v]=callback(u,v)}return heightMap},heightMap1=generateHeightMap(((u,v)=>{const d=distance(u-512,v-512),stretch=3*Math.PI/512,ripple=Math.sin(d*stretch);return Math.floor((ripple+1)/2*128)})),heightMap2=generateHeightMap(((u,v)=>{const cx=u-512,cy=v-512,d1=.022*distance(.8*cx,1.3*cy),d2=.022*distance(1.35*cx,.45*cy),h=Math.sin(d1)+Math.cos(d2);return Math.floor((h+2)/4*127)})),interpolate=(c1,c2,f)=>({r:Math.floor(c1.r+(c2.r-c1.r)*f),g:Math.floor(c1.g+(c2.g-c1.g)*f),b:Math.floor(c1.b+(c2.b-c1.b)*f)}),randomColor=()=>({r:Math.floor(255*Math.random()),g:Math.floor(255*Math.random()),b:Math.floor(255*Math.random())}),makeFiveColorGradient=colors=>{const gradient=[];for(let i=0;i<256;i++){const index=Math.floor(i/64),f=i%64/64;gradient[i]=interpolate(colors[index],colors[index+1],f)}return gradient};let dx1=0,dy1=0,dx2=0,dy2=0;const palettes=[makeFiveColorGradient([randomColor(),randomColor(),randomColor(),randomColor(),randomColor()]),makeFiveColorGradient([randomColor(),randomColor(),randomColor(),randomColor(),randomColor()])];let palette=[],prevDirection=1;const tick=time=>{var t;t=time,dx1=Math.floor((Math.cos(2e-4*t+.4+Math.PI)+1)/2*1024/2),dy1=Math.floor((Math.cos(3e-4*t-.1)+1)/2*1024/2),dx2=Math.floor((Math.cos(-2e-4*t+1.2)+1)/2*1024/2),dy2=Math.floor((Math.cos(-3e-4*t-.8+Math.PI)+1)/2*1024/2),(t=>{const x=5e-4*t,inter=(Math.cos(x)+1)/2,direction=-Math.sin(x)>=0?1:-1;prevDirection!=direction&&(prevDirection=direction,palettes[-1===direction?0:1]=makeFiveColorGradient([randomColor(),randomColor(),randomColor(),randomColor(),randomColor()]));for(let i=0;i<256;i++)palette[i]=interpolate(palettes[0][i],palettes[1][i],inter)})(time),(()=>{for(let u=0;u<512;u++)for(let v=0;v<512;v++){const k=1024*(u+dy2)+(v+dx2),j=512*u*4+4*v,h=heightMap1[1024*(u+dy1)+(v+dx1)]+heightMap2[k],c=palette[h];image.data[j]=c.r,image.data[j+1]=c.g,image.data[j+2]=c.b}})(),c.putImageData(image,0,0);const gradient=c.createRadialGradient(256,256,206,256,256,256);gradient.addColorStop(0,"rgba(0, 0, 0, 0)"),gradient.addColorStop(1,"rgba(14, 16, 18, 1)"),c.fillStyle=gradient,c.fillRect(0,0,512,512),requestAnimationFrame(tick)};requestAnimationFrame(tick)}function carrusel(){const slider=document.querySelector(".carrusel");let startX,scrollLeft,isDown=!1;slider.addEventListener("mousedown",(e=>{isDown=!0,slider.classList.add("active"),startX=e.pageX-slider.offsetLeft,scrollLeft=slider.scrollLeft})),slider.addEventListener("mouseleave",(_=>{isDown=!1,slider.classList.remove("active")})),slider.addEventListener("mouseup",(_=>{isDown=!1,slider.classList.remove("active")})),slider.addEventListener("mousemove",(e=>{if(!isDown)return;e.preventDefault();const walk=3*(e.pageX-slider.offsetLeft-startX);slider.scrollLeft=scrollLeft-walk}))}function mover(){const primerDesafio=document.querySelector(".carrusel").querySelector(".tarjeta:not(.ng-container)");primerDesafio&&primerDesafio.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"})}function subirImagen(){var myWidget=cloudinary.createUploadWidget({cloudName:"dogupuezd",uploadPreset:"illurito"},((error,result)=>{!error&&result&&"success"===result.event&&console.log("Done! Here is the image info: ",result.info)}));document.getElementById("upload_widget").addEventListener("click",(function(){myWidget.open()}),!1)}
+function principal() {
+    let lastScrollY = window.scrollY;
+    document
+        .querySelectorAll(".leftTyre, .rightTyre, .pedals, .rightLeg, .calf")
+        .forEach((el) => (el.style.animationPlayState = "paused"));
+
+    /**document.querySelector(".titulo-boton").onclick = function () {
+        document.querySelector('.pagina2').scrollIntoView({
+            behavior: 'smooth'
+        });
+    };**/
+
+    document.querySelector(".navmark").onclick = function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    window.onscrollend = function () {
+        road.classList.remove("animate-road-up");
+        document
+            .querySelectorAll(".leftTyre, .rightTyre, .pedals, .rightLeg, .calf")
+            .forEach((el) => (el.style.animationPlayState = "paused"));
+    };
+
+    window.onscroll = function () {
+        if (lastScrollY < window.scrollY) {
+            console.log(lastScrollY);
+            road.classList.add("animate-road-up");
+
+            // Activa otras animaciones hacia arriba (scroll hacia abajo)
+            document
+                .querySelectorAll(".leftTyre, .rightTyre, .pedals, .rightLeg, .calf")
+                .forEach((el) => (el.style.animationPlayState = "running"));
+
+            lastScrollY = window.scrollY;
+        } else {
+            // Detiene todas las animaciones
+            road.classList.remove("animate-road-up");
+
+            document
+                .querySelectorAll(".leftTyre, .rightTyre, .pedals, .rightLeg, .calf")
+                .forEach((el) => (el.style.animationPlayState = "paused"));
+
+            lastScrollY = window.scrollY;
+        }
+    };
+
+}
+
+function animacion() {
+    const canvas = document.getElementById("canvas");
+    const c = canvas.getContext("2d");
+
+    // size of canvas
+    const imgSize = 512;
+
+    canvas.width = imgSize;
+    canvas.height = imgSize;
+
+    // init image data with black pixels
+    const image = c.createImageData(imgSize, imgSize);
+    for (let i = 0; i < image.data.length; i += 4) {
+        image.data[i] = 0; // R
+        image.data[i + 1] = 0; // G
+        image.data[i + 2] = 0; // B
+        image.data[i + 3] = 255; // A
+    }
+
+    // size of our height maps
+    const mapSize = 1024;
+
+    // returns the distance of point x,y from the origin 0,0
+    const distance = (x, y) => Math.sqrt(x * x + y * y);
+
+    // init height map 1
+    const heightMap1 = [];
+    for (let u = 0; u < mapSize; u++) {
+        for (let v = 0; v < mapSize; v++) {
+            // index of coordinate in height map array
+            const i = u * mapSize + v;
+
+            // u,v are coordinates with origin at upper left corner
+            // cx and cy are coordinates with origin at the
+            // center of the map
+            const cx = u - mapSize / 2;
+            const cy = v - mapSize / 2;
+
+            // distance from middle of map
+            const d = distance(cx, cy);
+
+            // stretching so we get the desired ripple density on our map
+            const stretch = (3 * Math.PI) / (mapSize / 2);
+
+            // wavy height value between -1 and 1
+            const ripple = Math.sin(d * stretch);
+
+            // wavy height value normalized to 0..1
+            const normalized = (ripple + 1) / 2;
+
+            // height map value 0..128, integer
+            heightMap1[i] = Math.floor(normalized * 128);
+        }
+    }
+
+    const heightMap2 = [];
+    for (let u = 0; u < mapSize; u++) {
+        for (let v = 0; v < mapSize; v++) {
+            const i = u * mapSize + v;
+            const cx = u - mapSize / 2;
+            const cy = v - mapSize / 2;
+
+            // skewed distance as input to chaos field calculation,
+            // scaled for smoothness over map distance
+            const d1 = distance(0.8 * cx, 1.3 * cy) * 0.022;
+            const d2 = distance(1.35 * cx, 0.45 * cy) * 0.022;
+
+            const s = Math.sin(d1);
+            const c = Math.cos(d2);
+            // height value between -2 and +2
+            const h = s + c;
+
+            // height value between 0..1
+            const normalized = (h + 2) / 4;
+            // height value between 0..127, integer
+            heightMap2[i] = Math.floor(normalized * 127);
+        }
+    }
+
+    // color helpers
+
+    const interpolate = (c1, c2, f) => {
+        return {
+            r: Math.floor(c1.r + (c2.r - c1.r) * f),
+            g: Math.floor(c1.g + (c2.g - c1.g) * f),
+            b: Math.floor(c1.b + (c2.b - c1.b) * f)
+        };
+    };
+
+    // returns a random color
+    const randomColor = () => {
+        const r = Math.floor(Math.random() * 255);
+        const g = Math.floor(Math.random() * 255);
+        const b = Math.floor(Math.random() * 255);
+        return { r, g, b };
+    };
+
+    // returns a random color palette with 256 color entries
+    const makeRandomPalette = () => {
+        const c1 = randomColor();
+        const c2 = randomColor();
+        const c3 = randomColor();
+        const c4 = randomColor();
+        const c5 = randomColor();
+
+        return makeFiveColorGradient(c1, c2, c3, c4, c5);
+    };
+
+    const makeFiveColorGradient = (c1, c2, c3, c4, c5) => {
+        const g = [];
+
+        for (let i = 0; i < 64; i++) {
+            const f = i / 64;
+            g[i] = interpolate(c1, c2, f);
+        }
+
+        for (let i = 64; i < 128; i++) {
+            const f = (i - 64) / 64;
+            g[i] = interpolate(c2, c3, f);
+        }
+
+        for (let i = 128; i < 192; i++) {
+            const f = (i - 128) / 64;
+            g[i] = interpolate(c3, c4, f);
+        }
+
+        for (let i = 192; i < 256; i++) {
+            const f = (i - 192) / 64;
+            g[i] = interpolate(c4, c5, f);
+        }
+
+        return g;
+    };
+
+    // offsets for moving height maps
+    let dx1 = 0;
+    let dy1 = 0;
+
+    let dx2 = 0;
+    let dy2 = 0;
+
+    // adjust height maps offsets
+    const moveHeightMaps = t => {
+        dx1 = Math.floor(
+            (((Math.cos(t * 0.0002 + 0.4 + Math.PI) + 1) / 2) * mapSize) / 2
+        );
+        dy1 = Math.floor((((Math.cos(t * 0.0003 - 0.1) + 1) / 2) * mapSize) / 2);
+        dx2 = Math.floor((((Math.cos(t * -0.0002 + 1.2) + 1) / 2) * mapSize) / 2);
+        dy2 = Math.floor(
+            (((Math.cos(t * -0.0003 - 0.8 + Math.PI) + 1) / 2) * mapSize) / 2
+        );
+    };
+
+    // two palettes we interpolate between
+    const palettes = [makeRandomPalette(), makeRandomPalette()];
+
+    // current palette is edstablished durting animation
+    let palette = [];
+
+    // stores whether we're interpolating colors
+    // from palette 0 -> 1 (1) or 1 -> 0 (-1)
+    let prevDirection = 1;
+
+    const updatePalette = t => {
+        const timeScale = 0.0005;
+        const x = t * timeScale;
+
+        // normalized value 0..1 used to interpolate palette colors
+        const inter = (Math.cos(x) + 1) / 2;
+
+        // did we switch direction, and should ergo pick a new palette
+        // random palette to interpolate towards?
+
+        const direction = -Math.sin(x) >= 0 ? 1 : -1;
+        if (prevDirection != direction) {
+            prevDirection = direction;
+            if (direction == -1) {
+                palettes[0] = makeRandomPalette();
+            } else {
+                palettes[1] = makeRandomPalette();
+            }
+        }
+
+        // create interpolated palette for current frame
+        for (let i = 0; i < 256; i++) {
+            palette[i] = interpolate(palettes[0][i], palettes[1][i], inter);
+        }
+    };
+
+    const updateImageData = () => {
+        for (let u = 0; u < imgSize; u++) {
+            for (let v = 0; v < imgSize; v++) {
+                // indexes into height maps for pixel
+                const i = (u + dy1) * mapSize + (v + dx1);
+                const k = (u + dy2) * mapSize + (v + dx2);
+
+                // index for pixel in image data
+                // remember it's 4 bytes per pixel
+                const j = u * imgSize * 4 + v * 4;
+
+                // height value of 0..255
+                let h = heightMap1[i] + heightMap2[k];
+                // get color value from current palette
+                let c = palette[h];
+
+                // h = heightMap2[i];
+                // c = { r: h, g: h, b: h };
+
+                // set pixel data
+                image.data[j] = c.r;
+                image.data[j + 1] = c.g;
+                image.data[j + 2] = c.b;
+            }
+        }
+    };
+
+    // helper to create a linear gradient palette
+    const linearGradient = (c1, c2) => {
+        const g = [];
+
+        // interpolate between the colors
+        // in the gradient
+
+        for (let i = 0; i < 256; i++) {
+            const f = i / 255;
+            g[i] = interpolate(c1, c2, f);
+        }
+
+        return g;
+    };
+
+    const tick = time => {
+        moveHeightMaps(time);
+        updatePalette(time);
+        updateImageData();
+
+        c.putImageData(image, 0, 0);
+
+        requestAnimationFrame(tick);
+    };
+
+    requestAnimationFrame(tick);
+}
+
+function animacionIn() {
+    const canvas = document.getElementById("canvas");
+    const c = canvas.getContext("2d");
+
+
+
+    // size of canvas
+    const imgSize = 512;
+
+    canvas.width = imgSize;
+    canvas.height = imgSize;
+
+    // init image data with black pixels
+    const image = c.createImageData(imgSize, imgSize);
+    for (let i = 0; i < image.data.length; i += 4) {
+        image.data[i] = 0; // R
+        image.data[i + 1] = 0; // G
+        image.data[i + 2] = 0; // B
+        image.data[i + 3] = 255; // A
+    }
+
+    // size of our height maps
+    const mapSize = 1024;
+
+    // returns the distance of point x,y from the origin 0,0
+    const distance = (x, y) => Math.sqrt(x * x + y * y);
+
+    // init height map 1
+    const heightMap1 = [];
+    for (let u = 0; u < mapSize; u++) {
+        for (let v = 0; v < mapSize; v++) {
+            // index of coordinate in height map array
+            const i = u * mapSize + v;
+
+            // u,v are coordinates with origin at upper left corner
+            // cx and cy are coordinates with origin at the
+            // center of the map
+            const cx = u - mapSize / 2;
+            const cy = v - mapSize / 2;
+
+            // distance from middle of map
+            const d = distance(cx, cy);
+
+            // stretching so we get the desired ripple density on our map
+            const stretch = (3 * Math.PI) / (mapSize / 2);
+
+            // wavy height value between -1 and 1
+            const ripple = Math.sin(d * stretch);
+
+            // wavy height value normalized to 0..1
+            const normalized = (ripple + 1) / 2;
+
+            // height map value 0..128, integer
+            heightMap1[i] = Math.floor(normalized * 128);
+        }
+    }
+
+    const heightMap2 = [];
+    for (let u = 0; u < mapSize; u++) {
+        for (let v = 0; v < mapSize; v++) {
+            const i = u * mapSize + v;
+            const cx = u - mapSize / 2;
+            const cy = v - mapSize / 2;
+
+            // skewed distance as input to chaos field calculation,
+            // scaled for smoothness over map distance
+            const d1 = distance(0.8 * cx, 1.3 * cy) * 0.022;
+            const d2 = distance(1.35 * cx, 0.45 * cy) * 0.022;
+
+            const s = Math.sin(d1);
+            const c = Math.cos(d2);
+            // height value between -2 and +2
+            const h = s + c;
+
+            // height value between 0..1
+            const normalized = (h + 2) / 4;
+            // height value between 0..127, integer
+            heightMap2[i] = Math.floor(normalized * 127);
+        }
+    }
+
+    // color helpers
+
+    const interpolate = (c1, c2, f) => {
+        return {
+            r: Math.floor(c1.r + (c2.r - c1.r) * f),
+            g: Math.floor(c1.g + (c2.g - c1.g) * f),
+            b: Math.floor(c1.b + (c2.b - c1.b) * f)
+        };
+    };
+
+    // returns a random color
+    const randomColor = () => {
+        const r = Math.floor(Math.random() * 255);
+        const g = Math.floor(Math.random() * 255);
+        const b = Math.floor(Math.random() * 255);
+        return { r, g, b };
+    };
+
+    // returns a random color palette with 256 color entries
+    const makeRandomPalette = () => {
+        const c1 = randomColor();
+        const c2 = randomColor();
+        const c3 = randomColor();
+        const c4 = randomColor();
+        const c5 = randomColor();
+
+        return makeFiveColorGradient(c1, c2, c3, c4, c5);
+    };
+
+    const makeFiveColorGradient = (c1, c2, c3, c4, c5) => {
+        const g = [];
+
+        for (let i = 0; i < 64; i++) {
+            const f = i / 64;
+            g[i] = interpolate(c1, c2, f);
+        }
+
+        for (let i = 64; i < 128; i++) {
+            const f = (i - 64) / 64;
+            g[i] = interpolate(c2, c3, f);
+        }
+
+        for (let i = 128; i < 192; i++) {
+            const f = (i - 128) / 64;
+            g[i] = interpolate(c3, c4, f);
+        }
+
+        for (let i = 192; i < 256; i++) {
+            const f = (i - 192) / 64;
+            g[i] = interpolate(c4, c5, f);
+        }
+
+        return g;
+    };
+
+    // offsets for moving height maps
+    let dx1 = 0;
+    let dy1 = 0;
+
+    let dx2 = 0;
+    let dy2 = 0;
+
+    // adjust height maps offsets
+    const moveHeightMaps = t => {
+        dx1 = Math.floor(
+            (((Math.cos(t * 0.0002 + 0.4 + Math.PI) + 1) / 2) * mapSize) / 2
+        );
+        dy1 = Math.floor((((Math.cos(t * 0.0003 - 0.1) + 1) / 2) * mapSize) / 2);
+        dx2 = Math.floor((((Math.cos(t * -0.0002 + 1.2) + 1) / 2) * mapSize) / 2);
+        dy2 = Math.floor(
+            (((Math.cos(t * -0.0003 - 0.8 + Math.PI) + 1) / 2) * mapSize) / 2
+        );
+    };
+
+    // two palettes we interpolate between
+    const palettes = [makeRandomPalette(), makeRandomPalette()];
+
+    // current palette is edstablished durting animation
+    let palette = [];
+
+    // stores whether we're interpolating colors
+    // from palette 0 -> 1 (1) or 1 -> 0 (-1)
+    let prevDirection = 1;
+
+    const updatePalette = t => {
+        const timeScale = 0.0005;
+        const x = t * timeScale;
+
+        // normalized value 0..1 used to interpolate palette colors
+        const inter = (Math.cos(x) + 1) / 2;
+
+        // did we switch direction, and should ergo pick a new palette
+        // random palette to interpolate towards?
+
+        const direction = -Math.sin(x) >= 0 ? 1 : -1;
+        if (prevDirection != direction) {
+            prevDirection = direction;
+            if (direction == -1) {
+                palettes[0] = makeRandomPalette();
+            } else {
+                palettes[1] = makeRandomPalette();
+            }
+        }
+
+        // create interpolated palette for current frame
+        for (let i = 0; i < 256; i++) {
+            palette[i] = interpolate(palettes[0][i], palettes[1][i], inter);
+        }
+    };
+
+    const updateImageData = () => {
+        for (let u = 0; u < imgSize; u++) {
+            for (let v = 0; v < imgSize; v++) {
+                // indexes into height maps for pixel
+                const i = (u + dy1) * mapSize + (v + dx1);
+                const k = (u + dy2) * mapSize + (v + dx2);
+
+                // index for pixel in image data
+                // remember it's 4 bytes per pixel
+                const j = u * imgSize * 4 + v * 4;
+
+                // height value of 0..255
+                let h = heightMap1[i] + heightMap2[k];
+                // get color value from current palette
+                let c = palette[h];
+
+                // h = heightMap2[i];
+                // c = { r: h, g: h, b: h };
+
+                // set pixel data
+                image.data[j] = c.r;
+                image.data[j + 1] = c.g;
+                image.data[j + 2] = c.b;
+            }
+        }
+    };
+
+    // helper to create a linear gradient palette
+    const linearGradient = (c1, c2) => {
+        const g = [];
+
+        // interpolate between the colors
+        // in the gradient
+
+        for (let i = 0; i < 256; i++) {
+            const f = i / 255;
+            g[i] = interpolate(c1, c2, f);
+        }
+
+        return g;
+    };
+
+    const tick = time => {
+        moveHeightMaps(time);
+        updatePalette(time);
+        updateImageData();
+
+        c.putImageData(image, 0, 0);
+
+        // Add inset shadow
+        const shadowSize = 50; // Adjust this value to change the shadow size
+        const gradient = c.createRadialGradient(
+            imgSize / 2, imgSize / 2, imgSize / 2 - shadowSize,
+            imgSize / 2, imgSize / 2, imgSize / 2
+        );
+        gradient.addColorStop(0, 'rgba(0, 0, 0, 0)');
+        gradient.addColorStop(1, 'rgba(14, 16, 18, 1)');
+
+        c.fillStyle = gradient;
+        c.fillRect(0, 0, imgSize, imgSize);
+
+        requestAnimationFrame(tick);
+    };
+
+    requestAnimationFrame(tick);
+}
+
+
+function diseño() {
+    const cursor = curDot({
+        zIndex: 1000,
+    });
+
+    cursor.over("#canvas", {
+        background: "#fff",
+        borderColor: "transparent"
+    })
+
+    cursor.over(".carretera", {
+        background: "#fff",
+    });
+
+    cursor.over(".bici", {
+        background: "#fff",
+    });
+
+    cursor.over(".titulo", {
+        background: "#fff",
+        scale: 1.5
+    });
+
+    cursor.over(".titulo-boton", {
+        background: "#fff",
+    });
+
+    cursor.over("img", {
+        background: '#fff'
+    })
+
+    cursor.over("button", {
+        background: "#fff",
+    });
+
+
+    /**cursor.over(".scroll", {
+        background: "#ff4500",
+        borderColor: 'transparent',
+    });**/
+}
+
+function carrusel() {
+    const slider = document.querySelector('.carrusel');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    slider.addEventListener('mousedown', e => {
+        isDown = true;
+        slider.classList.add('active');
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+    });
+
+    slider.addEventListener('mouseleave', _ => {
+        isDown = false;
+        slider.classList.remove('active');
+    });
+
+    slider.addEventListener('mouseup', _ => {
+        isDown = false;
+        slider.classList.remove('active');
+    });
+
+    slider.addEventListener('mousemove', e => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - slider.offsetLeft;
+        const SCROLL_SPEED = 3;
+        const walk = (x - startX) * SCROLL_SPEED;
+        slider.scrollLeft = scrollLeft - walk;
+    });
+}
+
+function mover() {
+    const slider = document.querySelector('.carrusel');
+    const primerDesafio = slider.querySelector('.tarjeta:not(.ng-container)');
+
+    if (primerDesafio) {
+        primerDesafio.scrollIntoView({
+            behavior: 'smooth',
+            block: 'nearest',
+            inline: 'start'
+        });
+    }
+}
+
+function subirImagen() {
+    var myWidget = cloudinary.createUploadWidget({
+        cloudName: 'dogupuezd',
+        uploadPreset: 'illurito'
+    }, (error, result) => {
+        if (!error && result && result.event === "success") {
+            console.log('Done! Here is the image info: ', result.info);
+        }
+    }
+    )
+
+    document.getElementById("upload_widget").addEventListener("click", function () {
+        myWidget.open();
+    }, false);
+}
