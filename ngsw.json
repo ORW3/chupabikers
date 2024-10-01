@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1727747064333,
+  "timestamp": 1727747338865,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -16,7 +16,7 @@
         "/favicon.ico",
         "/firebase-messaging-sw.js",
         "/index.html",
-        "/main-5AUSVT5A.js",
+        "/main-BVZF6IC4.js",
         "/manifest.webmanifest",
         "/polyfills-SCHOHYNV.js",
         "/styles-AEWBRIIG.css"
@@ -115,8 +115,8 @@
     "/assets/svg/mountain-4.svg": "ee21cc721b2daed3ff493c7acee5b28f36dabf69",
     "/favicon.ico": "9c39f434fe1261f68c5e3eefdf734630d99c5670",
     "/firebase-messaging-sw.js": "d90849002bd48365bd30e3ed9741a8eba58bf715",
-    "/index.html": "2ba713273ae84856e4cb93bf83ed7969292add53",
-    "/main-5AUSVT5A.js": "434398cccc1339c3c3cd2a93e0913a897777234a",
+    "/index.html": "568fc5ad55820465881094294b844d27109315d3",
+    "/main-BVZF6IC4.js": "baf68b15ccb8a1b38c64bafb383819bca3329828",
     "/manifest.webmanifest": "f4a3f079c560c4db1fdfda74892afca9812064c2",
     "/media/KCDJHi-Jacker-35BVKPIN.woff": "19c628ee08d6f1fd3c4045c5a56d0a90f5ad9a43",
     "/media/KCDJHi-Jacker-BCBWUO4G.woff2": "44f9780f4a4d3575e833a30d5e188ad4e2d357e7",
