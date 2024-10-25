@@ -13,6 +13,8 @@ import { RutasService } from '../../services/rutas.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { DbPwaService } from '../../services/db-pwa.service';
+import { ConnectionService } from 'ngx-connection-service';
 
 declare function animacion(): any;
 
@@ -43,11 +45,18 @@ export class OrdenesComponent implements OnInit {
     private ordenService: OrdenService,
     private desafioService: DesafioService,
     private cdr: ChangeDetectorRef,
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    private dbPwaService: DbPwaService,
+    private connectionService: ConnectionService
   ) {
     this.rutas = this.rutasService;
     this.getOrdenes();
     this.getDesafios();
+    this.connectionService.monitor().subscribe((isConnected: any) => {
+      if (isConnected) {
+        this.enviarCancelacionesPendientes();
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -132,7 +141,6 @@ export class OrdenesComponent implements OnInit {
           },
           onApprove: (data: any, actions: any) => {
             actions.order.get().then((details: any) => {
-              
             });
           },
           onClientAuthorization: (data: any) => {
@@ -156,7 +164,8 @@ export class OrdenesComponent implements OnInit {
                 this.cdr.detectChanges();
               },
               (error) => {
-                console.error('Error al actualizar la orden', error);
+                console.error(`Error al actualizar la orden ${error}, se actualizará sin internet ;)`);
+                this.dbPwaService.guardarCancelacionKit(id);
               }
             );
           },
@@ -168,7 +177,8 @@ export class OrdenesComponent implements OnInit {
                 this.cdr.detectChanges();
               },
               (error) => {
-                console.error('Error al actualizar la orden', error);
+                console.error(`Error al actualizar la orden ${error}, se actualizará sin internet ;)`);
+                this.dbPwaService.guardarCancelacionKit(id);
               }
             );
           },
@@ -178,28 +188,6 @@ export class OrdenesComponent implements OnInit {
         alert(error.error);
       }
     );
-
-    /*render({
-      id: '#pagarDiv',
-      currency: 'MXN',
-      value: precio.toString(),
-
-      onApprove: (details) => {
-        console.log(details)
-        //actualizar orden
-        this.ordenService.actualizarOrden(id).subscribe(
-          (response) => {
-            console.log('Orden actualizada');
-            this.eliminarElementos();
-            this.getOrdenes();
-            this.cdr.detectChanges();
-          },
-          (error) => {
-            console.error('Error al actualizar la orden', error);
-          }
-        );
-      },
-    });*/
   }
 
   limpiarElementos(){
@@ -231,5 +219,23 @@ export class OrdenesComponent implements OnInit {
     } else {
       this.mostrar = true;
     }
+  }
+
+  enviarCancelacionesPendientes() {
+    this.dbPwaService.obtenerCancelacionesPendientes().then((cancelaciones:any) => {
+      cancelaciones.forEach((cancelacion: any) => {
+        this.ordenService.cancelarKitOrden(cancelacion.id).subscribe(
+          (response) => {
+            console.log('Orden cancelada con éxito');
+            this.dbPwaService.eliminarCancelacionKit(cancelacion.id);
+            this.getOrdenes();
+            this.cdr.detectChanges();
+          },
+          (error) => {
+            console.error('Error al enviar la cancelación de kit', error);
+          }
+        );
+      });
+    });
   }
 }

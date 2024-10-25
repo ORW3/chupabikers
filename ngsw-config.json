@@ -11,7 +11,11 @@
           "/index.html",
           "/manifest.webmanifest",
           "/*.css",
-          "/*.js"
+          "/*.js",
+          "/assets/sounds/bell.wav",
+          "/assets/sounds/rotating.wav"
+        ],
+        "urls": [
         ]
       }
     },
@@ -24,6 +28,21 @@
           "/assets/**",
           "/media/*.(svg|cur|jpg|jpeg|png|apng|webp|avif|gif|otf|ttf|woff|woff2)"
         ]
+      }
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "data-api",
+      "urls": [
+        "https://mtbapi.onrender.com/api/ordenes",
+        "https://mtbapi.onrender.com/api/desafios"
+      ],
+      "cacheConfig": {
+        "strategy": "freshness",
+        "maxSize": 5,
+        "maxAge": "50m",
+        "timeout": "5s"
       }
     }
   ]

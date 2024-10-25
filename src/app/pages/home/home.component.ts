@@ -23,7 +23,6 @@ declare function animacionIn(): any
 declare function principal(): any;
 declare function carrusel(): any;
 
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',

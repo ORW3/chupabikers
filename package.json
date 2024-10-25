@@ -9,7 +9,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "deploy": "npm run build && gh-pages -d dist/mtb/browser",
-    "start-pwa": "ng build --base-href=/ && npm run start"
+    "start-pwa": "ng build && http-server -p 4200 -c-1 dist/mtb/browser"
   },
   "private": true,
   "dependencies": {
@@ -18,6 +18,7 @@
     "@angular/common": "^17.0.0",
     "@angular/compiler": "^17.0.0",
     "@angular/core": "^17.0.0",
+    "@angular/fire": "^17.0.0",
     "@angular/forms": "^17.0.0",
     "@angular/material": "^17.3.9",
     "@angular/platform-browser": "^17.0.0",
@@ -29,22 +30,29 @@
     "crypto-js": "^4.2.0",
     "gh-pages": "^6.1.1",
     "ng2-file-upload": "^6.0.0",
+    "ngx-connection-service": "^17.0.1",
     "ngx-paypal": "^11.0.0",
+    "pouchdb-find": "^9.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.2"
   },
   "devDependencies": {
+    "@angular-builders/custom-webpack": "^17.0.1",
     "@angular-devkit/build-angular": "^17.0.10",
     "@angular/cli": "^17.0.10",
     "@angular/compiler-cli": "^17.0.0",
     "@types/jasmine": "~5.1.0",
+    "@types/pouchdb-browser": "^6.1.5",
+    "brotli-webpack-plugin": "^1.1.0",
+    "compression-webpack-plugin": "^11.1.0",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "pouchdb-browser": "^9.0.0",
     "typescript": "~5.2.2"
   }
 }

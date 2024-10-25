@@ -3,36 +3,36 @@
     <div class="scroll" style="--time: 40s">
       <div>
         <span (click)="this.rutas.irInicio()">Inicio</span>
-        <img width="20" alt="rueda" src="assets/img/wheel.png" class="rueda">
+        <img width="20px" alt="rueda" src="assets/img/wheel.webp" class="rueda">
         <span *ngIf="!isLoggedIn" (click)="this.rutas.irRegistro()">Registro</span><span *ngIf="isLoggedIn" (click)="logout()">Cerrar sesión</span>
-        <img width="20" alt="rueda" src="assets/img/wheel.png" class="rueda">
+        <img width="20px" alt="rueda" src="assets/img/wheel.webp" class="rueda">
         <span (click)="this.rutas.irInfo()">Información</span>
-        <img width="20" alt="rueda" *ngIf="mostrar" src="assets/img/wheel.png" class="rueda">
+        <img width="20px" alt="rueda" *ngIf="mostrar" src="assets/img/wheel.webp" class="rueda">
         <span *ngIf="mostrar" (click)="this.rutas.irInicio()">Inicio</span>
-        <img width="20" alt="rueda" *ngIf="mostrar" src="assets/img/wheel.png" class="rueda">
+        <img width="20px" alt="rueda" *ngIf="mostrar" src="assets/img/wheel.webp" class="rueda">
         <span *ngIf="!isLoggedIn && mostrar" (click)="this.rutas.irRegistro()">Registro</span><span *ngIf="isLoggedIn && mostrar" (click)="logout()">Cerrar sesión</span>
-        <img width="20" alt="rueda" *ngIf="mostrar" src="assets/img/wheel.png" class="rueda">
+        <img width="20px" alt="rueda" *ngIf="mostrar" src="assets/img/wheel.webp" class="rueda">
         <span *ngIf="mostrar" (click)="this.rutas.irInfo()">Información</span>
-        <img width="20" alt="rueda" *ngIf="mostrar" src="assets/img/wheel.png" class="rueda">
+        <img width="20px" alt="rueda" *ngIf="mostrar" src="assets/img/wheel.webp" class="rueda">
       </div>
       <div *ngIf="mostrar">
         <span (click)="this.rutas.irInicio()">Inicio</span>
-        <img width="20" alt="rueda" src="assets/img/wheel.png" class="rueda">
+        <img width="20px" alt="rueda" src="assets/img/wheel.webp" class="rueda">
         <span *ngIf="!isLoggedIn" (click)="this.rutas.irRegistro()">Registro</span><span *ngIf="isLoggedIn" (click)="logout()">Cerrar sesión</span>
-        <img width="20" alt="rueda" src="assets/img/wheel.png" class="rueda">
+        <img width="20px" alt="rueda" src="assets/img/wheel.webp" class="rueda">
         <span (click)="this.rutas.irInfo()">Información</span>
-        <img width="20" alt="rueda" src="assets/img/wheel.png" class="rueda">
+        <img width="20px" alt="rueda" src="assets/img/wheel.webp" class="rueda">
         <span (click)="this.rutas.irInicio()">Inicio</span>
-        <img width="20" alt="rueda" src="assets/img/wheel.png" class="rueda">
+        <img width="20px" alt="rueda" src="assets/img/wheel.webp" class="rueda">
         <span *ngIf="!isLoggedIn" (click)="this.rutas.irRegistro()">Registro</span><span *ngIf="isLoggedIn" (click)="logout()">Cerrar sesión</span>
-        <img width="20" alt="rueda" src="assets/img/wheel.png" class="rueda">
+        <img width="20px" alt="rueda" src="assets/img/wheel.webp" class="rueda">
         <span (click)="this.rutas.irInfo()">Información</span>
-        <img width="20" alt="rueda" src="assets/img/wheel.png" class="rueda">
+        <img width="20px" alt="rueda" src="assets/img/wheel.webp" class="rueda">
       </div>
     </div>
   </div>
   <div class="navmark">
-    <img alt="logo" src="assets/img/logo.png">
+    <img alt="logo" src="assets/img/logo.webp">
   </div>
 </div>
 
@@ -67,7 +67,7 @@
       <li *ngIf="desafio.disponible" id="tarjeta" class="tarjeta">
         <div class="tarjeta-cartel"><img class="cartel"
             [src]="desafio.imagen"
-            onerror="this.src='assets/img/no.png'" alt="" draggable="false"></div>
+            onerror="this.src='assets/img/no.webp'" alt="" draggable="false"></div>
         <div class="tarjeta-informacion">
           <h2 class="titulo-tarjeta">{{ desafio.nombreDesafio }} {{ desafio.numeroDesafio }}</h2>
           <p class="texto-blanco">{{ desafio.estado }}</p>
@@ -80,7 +80,7 @@
     </ng-container>
   </ul>
 </div>
-<div *ngIf="mostrar" class="pagina2 ocultar" id="pagina2">
+<div *ngIf="mostrar" class="pagina2" id="pagina2">
   <div id="tarjeta-presentacion">
     <div>
       <h1>Pedaleando por la aventura</h1>
@@ -92,15 +92,15 @@
         comunidades locales. ¡Pedalea con nosotros y descubre nuevas aventuras mientras apoyas el desarrollo de estas
         regiones!</p>
     </div>
-    <img [src]="this.currentImg" onerror="this.src='assets/img/imagen-tarjeta.jpg'" alt="">
+    <img [src]="this.currentImg" onerror="this.src='assets/img/imagen-tarjeta.avif'" alt="">
   </div>
 </div>
 <div class="menu" #conditionalContent *ngIf="showContent">
   <form [formGroup]="ordenForm" (ngSubmit)="onSubmit()">
     <div class="menu-titulo">{{ selectedDesafio?.nombreDesafio }} {{ selectedDesafio?.numeroDesafio }}</div>
     <div class="menu-estado border-top">{{ selectedDesafio?.estado }}</div>
-    <div class="menu-precio border-top"><strong>Precio: </strong>${{ selectedDesafio?.precio }} + ${{this.precio}}</div>
-    <div class="seleccion border-top">
+    <div class="menu-precio"><strong>Precio: </strong>${{ selectedDesafio?.precio }} + ${{this.precio}}</div>
+    <div class="seleccion">
       <label for="kitSeleccion">Kit:</label>
       <select #selectSelect class="select-select" (change)="onSelectionChange()" id="kitSeleccion" formControlName="kitSeleccion" required>
         <option class="select-opcion" value="">Seleccione un kit</option>
@@ -118,7 +118,7 @@
   <div class="conjunto-kits">
     <p *ngIf="kits.length <= 0" class="kit-texto">No hay kits disponibles para este desafio :(</p>
     <ng-container *ngFor="let kit of kits">
-      <img draggable="false" [src]="kit.imagen" onerror="this.src='assets/img/no.png'" alt="">
+      <img draggable="false" [src]="kit.imagen" onerror="this.src='assets/img/no.webp'" alt="">
       <p class="kit-texto">{{ kit.nombre }}</p>
       <p class="kit-texto">{{ kit.precio }}</p>
       <p class="kit-texto"><strong>Disponibilidad:</strong> {{ kit.existencia}}</p>
@@ -128,4 +128,3 @@
 <span *ngIf="isLoggedIn" (click)="this.rutas.irOrdenes()" class="carro-compras"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 336c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/></svg></span>
 <audio #campana src="assets/sounds/bell.wav"></audio>
 <canvas id="canvas" class="canvas no-ocultar"></canvas>
-

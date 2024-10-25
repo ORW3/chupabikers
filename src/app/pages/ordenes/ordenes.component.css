@@ -258,6 +258,7 @@ qrcode{
     flex-direction: row;
     border-bottom: 0.1rem solid white;
     overflow: hidden;
+    user-select: none;
   }
 
   #top-nav {
@@ -343,7 +344,7 @@ qrcode{
 
   .ordenes {
     width: 100%;
-    height: 60%;
+    height: 55%;
     font-size: 15px;
     overflow-y: scroll;
     scrollbar-width: thin;
@@ -373,7 +374,7 @@ qrcode{
     scrollbar-color: orangered transparent;
     scrollbar-gutter: stable; 
     scrollbar-width: thin;
-    height: 40%;
+    height: 45%;
     width: 100%;
     border-top: 0.1rem solid white;
     z-index: 1;

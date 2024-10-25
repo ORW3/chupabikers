@@ -16,6 +16,13 @@ import { NgxPayPalModule } from 'ngx-paypal';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { getMessaging, provideMessaging } from '@angular/fire/messaging';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { getAuth, provideAuth } from '@angular/fire/auth';
+
+import { environment } from '../environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +30,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     RegisterComponent,
     HomeComponent,
     OrdenesComponent,
-    InformacionComponent
+    InformacionComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,14 +40,18 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     QRCodeModule,
     MatFormFieldModule,
     NgxPayPalModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore()),
+    provideAuth(() => getAuth()),
+    provideMessaging(() => getMessaging()),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
-    })
+      registrationStrategy: 'registerWhenStable:30000',
+    }),
   ],
   providers: [AuthService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
